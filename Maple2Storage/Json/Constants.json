@@ -1,0 +1,70 @@
+﻿[
+  {
+    "Key": "MaxCharacterSlots",
+    "Value": "11"
+  },
+  {
+    "Key": "MesoMarketTax",
+    "Value": "0"
+  },
+  {
+    "Key": "MesoMarketPriceRange",
+    "Value": "0.2"
+  },
+  {
+    "Key": "MesoMarketAveragePrice",
+    "Value": "100"
+  },
+  {
+    "Key": "MesoMarketTotaListingsLimit",
+    "Value": "5"
+  },
+  {
+    "Key": "MesoMarketDailyListingsLimit",
+    "Value": "5"
+  },
+  {
+    "Key": "MesoMarketMonthlyPurchaseLimit",
+    "Value": "4"
+  },
+  {
+    "Key": "MesoMarketListingDayDuration",
+    "Value": "2"
+  },
+  {
+    "Key": "MesoMarketListingsDisplayCount",
+    "Value": "100"
+  },
+  {
+    "Key": "UGCShopExpiredListingRemovalHour",
+    "Value": "72"
+  },
+  {
+    "Key": "UGCShopProfitFee",
+    "Value": "0.25"
+  },
+  {
+    "Key": "UGCShopProfitDelayInDays",
+    "Value": "864000"
+  },
+  {
+    "Key": "ChannelCount",
+    "Value": "15"
+  },
+  {
+    "Key": "ClubMaxCount",
+    "Value": "3"
+  },
+  {
+    "Key": "ClubMaxMembers",
+    "Value": "10"
+  },
+  {
+    "Key": "MapleopolyTokenItemId",
+    "Value": "30001445"
+  },
+  {
+    "Key": "MapleopolyTokenCost",
+    "Value": "2"
+  }
+]

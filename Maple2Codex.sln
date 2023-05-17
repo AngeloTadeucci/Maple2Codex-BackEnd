@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameParser", "GameParser\GameParser.csproj", "{FDC52A7F-F323-455A-A9CD-82418A237D58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maple2Storage", "Maple2Storage\Maple2Storage.csproj", "{2A7E0D11-F87C-43FE-BDBC-D6B21601D332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NifToGltf", "NifToGltf\NifToGltf.csproj", "{CC37F7B9-0A4C-4B29-BB41-F8C51A4624EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaplePacketLib2", "MaplePacketLib2\MaplePacketLib2.csproj", "{0D7E1A23-5C6D-45B2-B9B4-DC6B7F31C627}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDC52A7F-F323-455A-A9CD-82418A237D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC52A7F-F323-455A-A9CD-82418A237D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC52A7F-F323-455A-A9CD-82418A237D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC52A7F-F323-455A-A9CD-82418A237D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A7E0D11-F87C-43FE-BDBC-D6B21601D332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7E0D11-F87C-43FE-BDBC-D6B21601D332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7E0D11-F87C-43FE-BDBC-D6B21601D332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7E0D11-F87C-43FE-BDBC-D6B21601D332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC37F7B9-0A4C-4B29-BB41-F8C51A4624EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC37F7B9-0A4C-4B29-BB41-F8C51A4624EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC37F7B9-0A4C-4B29-BB41-F8C51A4624EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC37F7B9-0A4C-4B29-BB41-F8C51A4624EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D7E1A23-5C6D-45B2-B9B4-DC6B7F31C627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7E1A23-5C6D-45B2-B9B4-DC6B7F31C627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7E1A23-5C6D-45B2-B9B4-DC6B7F31C627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7E1A23-5C6D-45B2-B9B4-DC6B7F31C627}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
