@@ -16,8 +16,7 @@ NpcParser.Parse();
 
 Console.WriteLine("Finished!");
 
-static void CreateDatabase()
-{
+static void CreateDatabase() {
     string databaseSql = File.ReadAllText(Path.Combine(Paths.SolutionDir, "GameParser", "Database.sql"));
     MySqlScript script = new(QueryManager.ConnectionNoDb(), databaseSql);
     script.Execute();

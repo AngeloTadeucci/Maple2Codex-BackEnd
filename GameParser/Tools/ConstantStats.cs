@@ -6,33 +6,26 @@ using MoonSharp.Interpreter;
 
 namespace GameParser.Tools;
 
-public static class ConstantStats
-{
-    public static void GetStats(Item item, out Dictionary<StatAttribute, Stat> constantStats)
-    {
-        constantStats = new();
+public static class ConstantStats {
+    public static void GetStats(Item item, out Dictionary<StatAttribute, Stat> constantStats) {
+        constantStats = [];
         int constantId = item.OptionConstantId;
         ItemOptionsConstant? basicOptions = ItemOptionConstantParser.GetMetadata(constantId, item.Rarity);
-        if (basicOptions == null)
-        {
+        if (basicOptions == null) {
             GetDefault(item, constantStats);
             return;
         }
 
-        foreach (ParserStat? stat in basicOptions.Stats)
-        {
-            constantStats[stat.Attribute] = new()
-            {
+        foreach (ParserStat? stat in basicOptions.Stats) {
+            constantStats[stat.Attribute] = new() {
                 ItemAttribute = stat.Attribute,
                 AttributeType = stat.AttributeType,
                 Value = stat.Value,
             };
         }
 
-        foreach (ParserSpecialStat? stat in basicOptions.SpecialStats)
-        {
-            constantStats[stat.Attribute] = new()
-            {
+        foreach (ParserSpecialStat? stat in basicOptions.SpecialStats) {
+            constantStats[stat.Attribute] = new() {
                 ItemAttribute = stat.Attribute,
                 AttributeType = stat.AttributeType,
                 Value = stat.Value,
@@ -41,27 +34,22 @@ public static class ConstantStats
 
         // TODO: Implement Hidden ndd (defense) and wapmax (Max Weapon Attack)
 
-        if (item.OptionLevelFactor > 50)
-        {
+        if (item.OptionLevelFactor > 50) {
             GetDefault(item, constantStats);
         }
     }
 
-    private static void GetDefault(Item item, Dictionary<StatAttribute, Stat> constantStats)
-    {
+    private static void GetDefault(Item item, Dictionary<StatAttribute, Stat> constantStats) {
         ItemOptionPick? baseOptions = ItemOptionPickParser.GetMetadata(item.OptionId, item.Rarity);
-        if (baseOptions is null)
-        {
+        if (baseOptions is null) {
             return;
         }
 
         Script? script = ScriptLoader.GetScript("Functions/calcItemValues");
 
-        foreach (ConstantPick? constantPick in baseOptions.Constants)
-        {
+        foreach (ConstantPick? constantPick in baseOptions.Constants) {
             string calcScript;
-            switch (constantPick.Stat)
-            {
+            switch (constantPick.Stat) {
                 case StatAttribute.Hp:
                     calcScript = "constant_value_hp";
                     break;
@@ -102,8 +90,7 @@ public static class ConstantStats
                     continue;
             }
 
-            constantStats.TryAdd(constantPick.Stat, new()
-            {
+            constantStats.TryAdd(constantPick.Stat, new() {
                 ItemAttribute = constantPick.Stat,
                 AttributeType = StatAttributeType.Flat,
                 Value = 0,
@@ -112,14 +99,12 @@ public static class ConstantStats
             float statValue = constantStats[constantPick.Stat].Value;
             DynValue? result = script?.RunFunction(calcScript, statValue, constantPick.DeviationValue, (int) item.Type,
                 item.RecommendJobs.First(), item.OptionLevelFactor, item.Rarity, item.Level);
-            if (result is null)
-            {
+            if (result is null) {
                 return;
             }
 
             constantStats[constantPick.Stat].Value = (float) result.Number;
-            if (constantStats[constantPick.Stat].Value <= 0.0000f)
-            {
+            if (constantStats[constantPick.Stat].Value <= 0.0000f) {
                 constantStats.Remove(constantPick.Stat);
             }
         }

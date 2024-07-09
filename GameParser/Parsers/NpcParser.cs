@@ -6,13 +6,12 @@ using SqlKata.Execution;
 
 namespace GameParser.Parsers;
 
-public static class NpcParser
-{
+public static class NpcParser {
     private static readonly string[] ClassName =
     {
         "Common", "Leader", "Elite", "Boss", "World Boss", "Dungeon Boss", "Friendly"
     };
-    
+
     private static readonly Dictionary<string, string> RaceName = new()
     {
         {"unknown", "Unknown"},
@@ -29,24 +28,19 @@ public static class NpcParser
         {"creature", "Inanimate"},
     };
 
-    public static void Parse()
-    {
-        JsonSerializerOptions options = new()
-        {
+    public static void Parse() {
+        JsonSerializerOptions options = new() {
             IncludeFields = true,
         };
 
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.NpcParser parser = new(Paths.XmlReader);
-        foreach ((int id, string? name, NpcData? data, List<EffectDummy> dummy) in parser.Parse())
-        {
+        foreach ((int id, string? name, NpcData? data, List<EffectDummy> dummy) in parser.Parse()) {
             string? npcName = name;
             string? portrait = data.basic.portrait.ToLower();
-            if (PetNameParser.PetNames.TryGetValue(id, out string? petName))
-            {
+            if (PetNameParser.PetNames.TryGetValue(id, out string? petName)) {
                 dynamic? item = QueryManager.QueryFactory.Query("items").Where("id", id).FirstOrDefault();
-                if (item is not null)
-                {
+                if (item is not null) {
                     portrait = item.icon_path;
                 }
 
@@ -57,9 +51,8 @@ public static class NpcParser
 
             string kfm = data.model.kfm.ToLower();
 
-            List<string> animations = new();
-            if (AnimationParser.Animations.TryGetValue(kfm, out List<string>? animation))
-            {
+            List<string> animations = [];
+            if (AnimationParser.Animations.TryGetValue(kfm, out List<string>? animation)) {
                 animations = animation;
             }
 
@@ -68,9 +61,8 @@ public static class NpcParser
 
             title ??= "";
             RaceName.TryGetValue(data.basic.raceString.FirstOrDefault() ?? "", out string? race);
-            
-            QueryManager.QueryFactory.Query("npcs").Insert(new
-            {
+
+            QueryManager.QueryFactory.Query("npcs").Insert(new {
                 id,
                 name = string.IsNullOrEmpty(npcName) ? "" : npcName,
                 kfm,

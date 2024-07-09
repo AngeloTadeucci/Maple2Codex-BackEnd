@@ -7,37 +7,29 @@ using Maple2Storage.Types.Metadata;
 
 namespace GameParser.Parsers;
 
-public static class ItemOptionRandomParser
-{
-    private static readonly Dictionary<int, ItemOptionRandomMetadata> ItemOptionRandom = new();
+public static class ItemOptionRandomParser {
+    private static readonly Dictionary<int, ItemOptionRandomMetadata> ItemOptionRandom = [];
 
-    static ItemOptionRandomParser()
-    {
-        Dictionary<int, List<ItemOptionRandom>> itemOptionsRandom = new();
+    static ItemOptionRandomParser() {
+        Dictionary<int, List<ItemOptionRandom>> itemOptionsRandom = [];
 
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files)
-        {
-            if (!entry.Name.StartsWith("itemoption/option/random"))
-            {
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
+            if (!entry.Name.StartsWith("itemoption/option/random")) {
                 continue;
             }
 
             XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(entry);
             XmlNodeList? nodeList = innerDocument.SelectNodes("/ms2/option");
-            if (nodeList is null)
-            {
+            if (nodeList is null) {
                 throw new($"Failed to load itemoption/option/random");
             }
-            
-            foreach (XmlNode node in nodeList)
-            {
+
+            foreach (XmlNode node in nodeList) {
                 int id = int.Parse(node.Attributes!["code"]?.Value ?? "0");
                 ItemOptionRandom itemOption = new();
 
-                foreach (XmlNode item in node.Attributes)
-                {
-                    switch (item.Name)
-                    {
+                foreach (XmlNode item in node.Attributes) {
+                    switch (item.Name) {
                         case "grade":
                             itemOption.Rarity = byte.Parse(node.Attributes["grade"]?.Value ?? "0");
                             break;
@@ -415,38 +407,31 @@ public static class ItemOptionRandomParser
                     }
                 }
 
-                if (itemOptionsRandom.TryGetValue(id, out List<ItemOptionRandom>? options))
-                {
+                if (itemOptionsRandom.TryGetValue(id, out List<ItemOptionRandom>? options)) {
                     options.Add(itemOption);
-                }
-                else
-                {
-                    itemOptionsRandom[id] = new()
-                    {
+                } else {
+                    itemOptionsRandom[id] =
+                    [
                         itemOption
-                    };
+                    ];
                 }
             }
 
-            foreach ((int id, List<ItemOptionRandom> itemOptions) in itemOptionsRandom)
-            {
-                ItemOptionRandom[id] = new()
-                {
+            foreach ((int id, List<ItemOptionRandom> itemOptions) in itemOptionsRandom) {
+                ItemOptionRandom[id] = new() {
                     Id = id,
                     ItemOptions = itemOptions
                 };
             }
         }
     }
-    
-    public static ItemOptionRandom? GetMetadata(int id, int rarity)
-    {
+
+    public static ItemOptionRandom? GetMetadata(int id, int rarity) {
         ItemOptionRandomMetadata? metadata = ItemOptionRandom.Values.FirstOrDefault(x => x.Id == id);
         return metadata?.ItemOptions.FirstOrDefault(x => x.Rarity == rarity);
     }
-    
-    public static ItemOptionRandomMetadata? GetMetadata(int id)
-    {
+
+    public static ItemOptionRandomMetadata? GetMetadata(int id) {
         return ItemOptionRandom.Values.FirstOrDefault(x => x.Id == id);
     }
 }

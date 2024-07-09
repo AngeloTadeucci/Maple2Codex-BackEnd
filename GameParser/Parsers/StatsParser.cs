@@ -4,59 +4,49 @@ using Maple2Storage.Types;
 
 namespace GameParser.Parsers;
 
-public static class StatsParser
-{
+public static class StatsParser {
     public static void ParseStats(Item item, out List<(Stat stat, string description)> constantStats,
         out List<(StatRange stat, string description)> staticStats,
         out List<(StatRange stat, string description)> randomStats,
         out int randomStatCount
-    )
-    {
-        constantStats = new();
-        staticStats = new();
-        randomStats = new();
+    ) {
+        constantStats = [];
+        staticStats = [];
+        randomStats = [];
         randomStatCount = 0;
-        if (item.Rarity is 0 or > 6)
-        {
+        if (item.Rarity is 0 or > 6) {
             return;
         }
 
         ConstantStats.GetStats(item, out Dictionary<StatAttribute, Stat> constantStats2);
-        foreach ((StatAttribute _, Stat value) in constantStats2)
-        {
+        foreach ((StatAttribute _, Stat value) in constantStats2) {
             string stringKey = $"{StatToString(value.ItemAttribute)}_{(value.AttributeType is StatAttributeType.Flat ? "v" : "r")}";
 
-            if (StringCommonParser.Get(stringKey, out string? description))
-            {
+            if (StringCommonParser.Get(stringKey, out string? description)) {
                 constantStats.Add((value, description!));
             }
         }
 
         StaticStats.GetStats(item, out Dictionary<StatAttribute, StatRange> staticStats2);
-        foreach ((StatAttribute _, StatRange value) in staticStats2)
-        {
+        foreach ((StatAttribute _, StatRange value) in staticStats2) {
             string stringKey = $"{StatToString(value.ItemAttribute)}_{(value.AttributeType is StatAttributeType.Flat ? "v" : "r")}";
 
-            if (StringCommonParser.Get(stringKey, out string? description))
-            {
+            if (StringCommonParser.Get(stringKey, out string? description)) {
                 staticStats.Add((value, description!));
             }
         }
 
         RandomStats.GetStats(item, out Dictionary<StatAttribute, StatRange> randomStats2, out randomStatCount);
-        foreach ((StatAttribute _, StatRange value) in randomStats2)
-        {
+        foreach ((StatAttribute _, StatRange value) in randomStats2) {
             string stringKey = $"{StatToString(value.ItemAttribute)}_{(value.AttributeType is StatAttributeType.Flat ? "v" : "r")}";
 
-            if (StringCommonParser.Get(stringKey, out string? description))
-            {
+            if (StringCommonParser.Get(stringKey, out string? description)) {
                 randomStats.Add((value, description!));
             }
         }
     }
 
-    private static string StatToString(StatAttribute stat) => stat switch
-    {
+    private static string StatToString(StatAttribute stat) => stat switch {
         StatAttribute.Defense => "s_word_stat_ndd",
         StatAttribute.Str => "s_word_stat_str",
         StatAttribute.Dex => "s_word_stat_dex",

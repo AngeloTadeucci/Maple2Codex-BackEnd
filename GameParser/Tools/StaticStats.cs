@@ -6,29 +6,23 @@ using MoonSharp.Interpreter;
 
 namespace GameParser.Tools;
 
-public static class StaticStats
-{
-    public static void GetStats(Item item, out Dictionary<StatAttribute, StatRange> staticStats)
-    {
-        staticStats = new();
-        if (item.OptionLevelFactor < 50)
-        {
+public static class StaticStats {
+    public static void GetStats(Item item, out Dictionary<StatAttribute, StatRange> staticStats) {
+        staticStats = [];
+        if (item.OptionLevelFactor < 50) {
             return;
         }
 
         int staticId = item.OptionStaticId;
 
         ItemOptionsStatic? staticOptions = ItemOptionStaticParser.GetMetadata(staticId, item.Rarity);
-        if (staticOptions == null)
-        {
+        if (staticOptions == null) {
             GetDefault(item, staticStats);
             return;
         }
 
-        foreach (ParserStat? stat in staticOptions.Stats)
-        {
-            staticStats[stat.Attribute] = new()
-            {
+        foreach (ParserStat? stat in staticOptions.Stats) {
+            staticStats[stat.Attribute] = new() {
                 ItemAttribute = stat.Attribute,
                 AttributeType = stat.AttributeType,
                 ValueMin = stat.Value,
@@ -36,10 +30,8 @@ public static class StaticStats
             };
         }
 
-        foreach (ParserSpecialStat? stat in staticOptions.SpecialStats)
-        {
-            staticStats[stat.Attribute] = new()
-            {
+        foreach (ParserSpecialStat? stat in staticOptions.SpecialStats) {
+            staticStats[stat.Attribute] = new() {
                 ItemAttribute = stat.Attribute,
                 AttributeType = stat.AttributeType,
                 ValueMin = stat.Value,
@@ -52,35 +44,28 @@ public static class StaticStats
         GetDefault(item, staticStats);
     }
 
-    private static void GetDefault(Item item, Dictionary<StatAttribute, StatRange> stats)
-    {
+    private static void GetDefault(Item item, Dictionary<StatAttribute, StatRange> stats) {
         ItemOptionPick? baseOptions = ItemOptionPickParser.GetMetadata(item.OptionId, item.Rarity);
-        if (baseOptions is null)
-        {
+        if (baseOptions is null) {
             return;
         }
 
         Script? script = ScriptLoader.GetScript("Functions/calcItemValues");
-        if (script is null)
-        {
+        if (script is null) {
             return;
         }
-        foreach (StaticPick? staticPickFlat in baseOptions.StaticValues)
-        {
+        foreach (StaticPick? staticPickFlat in baseOptions.StaticValues) {
             SetStat(stats, staticPickFlat, item, script, item.OptionLevelFactor);
         }
 
-        foreach (StaticPick? staticPickRate in baseOptions.StaticRates)
-        {
+        foreach (StaticPick? staticPickRate in baseOptions.StaticRates) {
             SetStat(stats, staticPickRate, item, script, item.OptionLevelFactor);
         }
     }
 
     private static void SetStat(Dictionary<StatAttribute, StatRange> stats,
-        StaticPick staticPick, Item item, Script script, float optionLevelFactor)
-    {
-        stats.TryAdd(staticPick.Stat, new()
-        {
+        StaticPick staticPick, Item item, Script script, float optionLevelFactor) {
+        stats.TryAdd(staticPick.Stat, new() {
             ItemAttribute = staticPick.Stat,
             AttributeType = StatAttributeType.Flat,
             ValueMin = 0,
@@ -95,21 +80,16 @@ public static class StaticStats
         stats[staticPick.Stat].ValueMin = (float) statValue.min;
         stats[staticPick.Stat].ValueMax = (float) statValue.max;
 
-        if (stats[staticPick.Stat].ValueMin <= 0.0000f || stats[staticPick.Stat].ValueMax <= 0.0000f)
-        {
+        if (stats[staticPick.Stat].ValueMin <= 0.0000f || stats[staticPick.Stat].ValueMax <= 0.0000f) {
             stats.Remove(staticPick.Stat);
-        }
-        else
-        {
+        } else {
             stats[staticPick.Stat] = valueTuple;
         }
     }
 
-    private static (double min, double max) CalculateStat(Item item, float optionLevelFactor, StaticPick staticPick, Script script, float currentStatValue)
-    {
+    private static (double min, double max) CalculateStat(Item item, float optionLevelFactor, StaticPick staticPick, Script script, float currentStatValue) {
         string calcScript;
-        switch (staticPick.Stat)
-        {
+        switch (staticPick.Stat) {
             case StatAttribute.Hp:
                 calcScript = "static_value_hp";
                 break;
@@ -141,17 +121,14 @@ public static class StaticStats
         DynValue? result = script.RunFunction(calcScript, currentStatValue, staticPick.DeviationValue, (int) item.Type,
             item.RecommendJobs.First(), optionLevelFactor, item.Rarity, item.Level);
 
-        if (result is null)
-        {
+        if (result is null) {
             return (0, 0);
         }
-        if (result.Tuple.Length < 2)
-        {
+        if (result.Tuple.Length < 2) {
             return (0, 0);
         }
 
-        if (result.Tuple[0].Number == 0 && result.Tuple[1].Number == 0)
-        {
+        if (result.Tuple[0].Number == 0 && result.Tuple[1].Number == 0) {
             return (0, 0);
         }
 

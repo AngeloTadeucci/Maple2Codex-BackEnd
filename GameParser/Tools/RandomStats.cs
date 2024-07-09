@@ -5,57 +5,47 @@ using Maple2Storage.Types.Metadata;
 
 namespace GameParser.Tools;
 
-public static class RandomStats
-{
-    public static void GetStats(Item item, out Dictionary<StatAttribute, StatRange> randomStats, out int slots)
-    {
-        randomStats = new();
+public static class RandomStats {
+    public static void GetStats(Item item, out Dictionary<StatAttribute, StatRange> randomStats, out int slots) {
+        randomStats = [];
         slots = 0;
         ItemOptionRandom? randomOptions = ItemOptionRandomParser.GetMetadata(item.RandomId, item.Rarity);
-        if (randomOptions == null)
-        {
+        if (randomOptions == null) {
             return;
         }
 
         Random random = Random.Shared;
-        if (randomOptions.Slots.Length > 0)
-        {
+        if (randomOptions.Slots.Length > 0) {
             slots = random.Next(randomOptions.Slots[0], randomOptions.Slots[1]);
         }
 
         IEnumerable<StatRange> itemStats = RollStats(randomOptions, item);
 
-        foreach (StatRange? stat in itemStats)
-        {
+        foreach (StatRange? stat in itemStats) {
             randomStats[stat.ItemAttribute] = stat;
         }
     }
 
-    private static IEnumerable<StatRange> RollStats(ItemOptionRandom randomOptions, Item item)
-    {
-        List<StatRange> itemStats = new();
+    private static IEnumerable<StatRange> RollStats(ItemOptionRandom randomOptions, Item item) {
+        List<StatRange> itemStats = [];
 
-        foreach (ParserStat? stat in randomOptions.Stats)
-        {
+        foreach (ParserStat? stat in randomOptions.Stats) {
             Dictionary<StatAttribute, List<ParserStat>> rangeDictionary = GetRange(item);
-            if (!rangeDictionary.ContainsKey(stat.Attribute))
-            {
+            if (!rangeDictionary.ContainsKey(stat.Attribute)) {
                 continue;
             }
 
             List<ParserStat> parserStats = rangeDictionary[stat.Attribute];
             ParserStat parserSpecialStatMin = parserStats[RollMinMax(item, true)];
             ParserStat parserSpecialStatMax = parserStats[RollMinMax(item, false)];
-            StatRange normalStat = new()
-            {
+            StatRange normalStat = new() {
                 ItemAttribute = parserSpecialStatMin.Attribute,
                 AttributeType = parserSpecialStatMin.AttributeType,
                 ValueMin = parserSpecialStatMin.Value,
                 ValueMax = parserSpecialStatMax.Value,
             };
 
-            if (randomOptions.MultiplyFactor > 0)
-            {
+            if (randomOptions.MultiplyFactor > 0) {
                 normalStat.ValueMin *= (int) Math.Ceiling(randomOptions.MultiplyFactor);
                 normalStat.ValueMin *= randomOptions.MultiplyFactor;
 
@@ -66,27 +56,23 @@ public static class RandomStats
             itemStats.Add(normalStat);
         }
 
-        foreach (ParserSpecialStat? stat in randomOptions.SpecialStats)
-        {
+        foreach (ParserSpecialStat? stat in randomOptions.SpecialStats) {
             Dictionary<StatAttribute, List<ParserSpecialStat>> rangeDictionary = GetSpecialRange(item);
-            if (!rangeDictionary.ContainsKey(stat.Attribute))
-            {
+            if (!rangeDictionary.ContainsKey(stat.Attribute)) {
                 continue;
             }
 
             List<ParserSpecialStat> parserSpecialStats = rangeDictionary[stat.Attribute];
             ParserSpecialStat parserSpecialStatMin = parserSpecialStats[RollMinMax(item, true)];
             ParserSpecialStat parserSpecialStatMax = parserSpecialStats[RollMinMax(item, false)];
-            StatRange specialStat = new()
-            {
+            StatRange specialStat = new() {
                 ItemAttribute = parserSpecialStatMin.Attribute,
                 AttributeType = parserSpecialStatMin.AttributeType,
                 ValueMin = parserSpecialStatMin.Value,
                 ValueMax = parserSpecialStatMax.Value,
             };
 
-            if (randomOptions.MultiplyFactor > 0)
-            {
+            if (randomOptions.MultiplyFactor > 0) {
                 specialStat.ValueMin *= (int) Math.Ceiling(randomOptions.MultiplyFactor);
                 specialStat.ValueMin *= randomOptions.MultiplyFactor;
 
@@ -100,40 +86,32 @@ public static class RandomStats
         return itemStats;
     }
 
-    private static Dictionary<StatAttribute, List<ParserStat>> GetRange(Item item)
-    {
-        if (Item.IsAccessory(item.Slot))
-        {
+    private static Dictionary<StatAttribute, List<ParserStat>> GetRange(Item item) {
+        if (Item.IsAccessory(item.Slot)) {
             return ItemOptionRangeParser.GetAccessoryRanges();
         }
 
-        if (Item.IsArmor(item.Slot))
-        {
+        if (Item.IsArmor(item.Slot)) {
             return ItemOptionRangeParser.GetArmorRanges();
         }
 
-        if (Item.IsWeapon(item.Slot))
-        {
+        if (Item.IsWeapon(item.Slot)) {
             return ItemOptionRangeParser.GetWeaponRanges();
         }
 
         return ItemOptionRangeParser.GetPetRanges();
     }
 
-    private static Dictionary<StatAttribute, List<ParserSpecialStat>> GetSpecialRange(Item item)
-    {
-        if (Item.IsAccessory(item.Slot))
-        {
+    private static Dictionary<StatAttribute, List<ParserSpecialStat>> GetSpecialRange(Item item) {
+        if (Item.IsAccessory(item.Slot)) {
             return ItemOptionRangeParser.GetAccessorySpecialRanges();
         }
 
-        if (Item.IsArmor(item.Slot))
-        {
+        if (Item.IsArmor(item.Slot)) {
             return ItemOptionRangeParser.GetArmorSpecialRanges();
         }
 
-        if (Item.IsWeapon(item.Slot))
-        {
+        if (Item.IsWeapon(item.Slot)) {
             return ItemOptionRangeParser.GetWeaponSpecialRanges();
         }
 
@@ -142,13 +120,10 @@ public static class RandomStats
 
     // Returns index 0~7 for equip level 70-
     // Returns index 8~15 for equip level 70+
-    private static int Roll(Item item)
-    {
+    private static int Roll(Item item) {
         Random random = Random.Shared;
-        if (item.OptionLevelFactor >= 70)
-        {
-            return random.NextDouble() switch
-            {
+        if (item.OptionLevelFactor >= 70) {
+            return random.NextDouble() switch {
                 >= 0.0 and < 0.24 => 8,
                 >= 0.24 and < 0.48 => 9,
                 >= 0.48 and < 0.74 => 10,
@@ -160,8 +135,7 @@ public static class RandomStats
             };
         }
 
-        return random.NextDouble() switch
-        {
+        return random.NextDouble() switch {
             >= 0.0 and < 0.24 => 0,
             >= 0.24 and < 0.48 => 1,
             >= 0.48 and < 0.74 => 2,
@@ -173,10 +147,8 @@ public static class RandomStats
         };
     }
 
-    private static int RollMinMax(Item item, bool minRoll)
-    {
-        if (item.OptionLevelFactor >= 70)
-        {
+    private static int RollMinMax(Item item, bool minRoll) {
+        if (item.OptionLevelFactor >= 70) {
             return minRoll ? 8 : 15;
         }
 

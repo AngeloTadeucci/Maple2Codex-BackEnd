@@ -5,25 +5,19 @@ using SqlKata.Execution;
 
 namespace GameParser.Parsers;
 
-public static class ItemDropParser
-{
-    public static void Parse()
-    {
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files)
-        {
-            if (!entry.Name.StartsWith("table/individualitemdrop") && !entry.Name.StartsWith("table/na/individualitemdrop"))
-            {
+public static class ItemDropParser {
+    public static void Parse() {
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
+            if (!entry.Name.StartsWith("table/individualitemdrop") && !entry.Name.StartsWith("table/na/individualitemdrop")) {
                 continue;
             }
 
             XmlDocument? document = Paths.XmlReader.GetXmlDocument(entry);
             XmlNodeList individualBoxItems = document.SelectNodes("/ms2/individualDropBox")!;
-            foreach (XmlNode node in individualBoxItems)
-            {
+            foreach (XmlNode node in individualBoxItems) {
                 string locale = node.Attributes!["locale"]?.Value ?? "";
 
-                if (locale != "NA" && locale != "")
-                {
+                if (locale != "NA" && locale != "") {
                     continue;
                 }
 
@@ -34,14 +28,12 @@ public static class ItemDropParser
                 int groupDropId = int.Parse(node.Attributes["dropGroup"]!.Value);
 
                 _ = byte.TryParse(node.Attributes["PackageUIShowGrade"]?.Value ?? "0", out byte rarity);
-                if (rarity == 0)
-                {
+                if (rarity == 0) {
                     rarity = 1;
                 }
 
                 Console.WriteLine("Parsing box " + boxId);
-                QueryManager.QueryFactory.Query("item_boxes").Insert(new
-                {
+                QueryManager.QueryFactory.Query("item_boxes").Insert(new {
                     box_id = boxId,
                     item_id = int.Parse(node.Attributes["item"]!.Value),
                     item_id2 = node.Attributes["item2"] is not null ? int.Parse(node.Attributes["item2"]!.Value) : 0,

@@ -6,29 +6,23 @@ using Maple2Storage.Types.Metadata;
 
 namespace GameParser.Parsers;
 
-public static class ItemOptionRangeParser
-{
-    private static readonly Dictionary<ItemOptionRangeType, Dictionary<StatAttribute, List<ParserStat>>> NormalRange = new();
-    private static readonly Dictionary<ItemOptionRangeType, Dictionary<StatAttribute, List<ParserSpecialStat>>> SpecialRange = new();
-    
-    static ItemOptionRangeParser()
-    {
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files.Where(x => x.Name.StartsWith("table/itemoptionvariation_")))
-        {
+public static class ItemOptionRangeParser {
+    private static readonly Dictionary<ItemOptionRangeType, Dictionary<StatAttribute, List<ParserStat>>> NormalRange = [];
+    private static readonly Dictionary<ItemOptionRangeType, Dictionary<StatAttribute, List<ParserSpecialStat>>> SpecialRange = [];
+
+    static ItemOptionRangeParser() {
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files.Where(x => x.Name.StartsWith("table/itemoptionvariation_"))) {
             XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(entry);
             XmlNodeList? nodeList = innerDocument.SelectNodes("/ms2/option");
             string filename = Path.GetFileNameWithoutExtension(entry.Name);
-            
-            if (nodeList is null)
-            {
+
+            if (nodeList is null) {
                 throw new("Failed to load itemoptionvariation.xml");
             }
 
             ItemOptionRangeMetadata metadata = new();
-            foreach (XmlNode node in nodeList)
-            {
-                switch (filename)
-                {
+            foreach (XmlNode node in nodeList) {
+                switch (filename) {
                     case "itemoptionvariation_acc":
                         metadata.RangeType = ItemOptionRangeType.itemoptionvariation_acc;
                         break;
@@ -44,8 +38,7 @@ public static class ItemOptionRangeParser
                 }
 
                 string option = node.Attributes!["name"]!.Value;
-                switch (option)
-                {
+                switch (option) {
                     case "strValue":
                         metadata.Stats[StatAttribute.Str] = ParseNormalStat(StatAttribute.Str, node, StatAttributeType.Flat);
                         break;
@@ -327,66 +320,54 @@ public static class ItemOptionRangeParser
             SpecialRange[metadata.RangeType] = metadata.SpecialStats;
         }
     }
-    
-    private static List<ParserStat> ParseNormalStat(StatAttribute attribute, XmlNode node, StatAttributeType type)
-    {
-        List<ParserStat> values = new();
-        for (int i = 2; i <= 17; i++)
-        {
+
+    private static List<ParserStat> ParseNormalStat(StatAttribute attribute, XmlNode node, StatAttributeType type) {
+        List<ParserStat> values = [];
+        for (int i = 2; i <= 17; i++) {
             values.Add(new(attribute, float.Parse(node.Attributes![$"idx{i}"]!.Value), type));
         }
 
         return values;
     }
 
-    private static List<ParserSpecialStat> ParseSpecialStat(StatAttribute attribute, XmlNode node, StatAttributeType type)
-    {
-        List<ParserSpecialStat> values = new();
-        for (int i = 2; i <= 17; i++)
-        {
+    private static List<ParserSpecialStat> ParseSpecialStat(StatAttribute attribute, XmlNode node, StatAttributeType type) {
+        List<ParserSpecialStat> values = [];
+        for (int i = 2; i <= 17; i++) {
             values.Add(new(attribute, float.Parse(node.Attributes![$"idx{i}"]!.Value), type));
         }
 
         return values;
     }
-    
-    public static Dictionary<StatAttribute, List<ParserStat>> GetAccessoryRanges()
-    {
+
+    public static Dictionary<StatAttribute, List<ParserStat>> GetAccessoryRanges() {
         return NormalRange[ItemOptionRangeType.itemoptionvariation_acc];
     }
 
-    public static Dictionary<StatAttribute, List<ParserStat>> GetArmorRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserStat>> GetArmorRanges() {
         return NormalRange[ItemOptionRangeType.itemoptionvariation_armor];
     }
 
-    public static Dictionary<StatAttribute, List<ParserStat>> GetPetRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserStat>> GetPetRanges() {
         return NormalRange[ItemOptionRangeType.itemoptionvariation_pet];
     }
 
-    public static Dictionary<StatAttribute, List<ParserStat>> GetWeaponRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserStat>> GetWeaponRanges() {
         return NormalRange[ItemOptionRangeType.itemoptionvariation_weapon];
     }
 
-    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetAccessorySpecialRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetAccessorySpecialRanges() {
         return SpecialRange[ItemOptionRangeType.itemoptionvariation_acc];
     }
 
-    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetArmorSpecialRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetArmorSpecialRanges() {
         return SpecialRange[ItemOptionRangeType.itemoptionvariation_armor];
     }
 
-    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetPetSpecialRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetPetSpecialRanges() {
         return SpecialRange[ItemOptionRangeType.itemoptionvariation_pet];
     }
 
-    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetWeaponSpecialRanges()
-    {
+    public static Dictionary<StatAttribute, List<ParserSpecialStat>> GetWeaponSpecialRanges() {
         return SpecialRange[ItemOptionRangeType.itemoptionvariation_weapon];
     }
 }

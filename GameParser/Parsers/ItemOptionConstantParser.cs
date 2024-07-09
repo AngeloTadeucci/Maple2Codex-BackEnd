@@ -6,46 +6,36 @@ using Maple2Storage.Types.Metadata;
 
 namespace GameParser.Parsers;
 
-public static class ItemOptionConstantParser
-{
-    private static readonly Dictionary<int, ItemOptionConstantMetadata> ItemOptionConstant = new();
+public static class ItemOptionConstantParser {
+    private static readonly Dictionary<int, ItemOptionConstantMetadata> ItemOptionConstant = [];
 
-    static ItemOptionConstantParser()
-    {
-        Dictionary<int, List<ItemOptionsConstant>> itemOptionsConstant = new();
+    static ItemOptionConstantParser() {
+        Dictionary<int, List<ItemOptionsConstant>> itemOptionsConstant = [];
 
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files)
-        {
-            if (!entry.Name.StartsWith("itemoption/constant"))
-            {
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
+            if (!entry.Name.StartsWith("itemoption/constant")) {
                 continue;
             }
 
             XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(entry);
             XmlNodeList? nodeList = innerDocument.SelectNodes("/ms2/option");
-            if (nodeList is null)
-            {
+            if (nodeList is null) {
                 continue;
             }
 
-            foreach (XmlNode node in nodeList)
-            {
+            foreach (XmlNode node in nodeList) {
                 int id = int.Parse(node.Attributes?["code"]?.Value ?? "0");
                 ItemOptionsConstant constant = new();
 
-                if (node.Attributes is null)
-                {
+                if (node.Attributes is null) {
                     throw new("Failed to load itemoption/constant.xml");
                 }
-                
-                foreach (XmlNode item in node.Attributes)
-                {
-                    if (node.Attributes[item.Name] is null)
-                    {
+
+                foreach (XmlNode item in node.Attributes) {
+                    if (node.Attributes[item.Name] is null) {
                         continue;
                     }
-                    switch (item.Name)
-                    {
+                    switch (item.Name) {
                         case "code":
                             break;
                         case "grade":
@@ -377,24 +367,19 @@ public static class ItemOptionConstantParser
                     }
                 }
 
-                if (itemOptionsConstant.TryGetValue(id, out List<ItemOptionsConstant>? options))
-                {
+                if (itemOptionsConstant.TryGetValue(id, out List<ItemOptionsConstant>? options)) {
                     options.Add(constant);
-                }
-                else
-                {
-                    itemOptionsConstant[id] = new()
-                    {
+                } else {
+                    itemOptionsConstant[id] =
+                    [
                         constant
-                    };
+                    ];
                 }
             }
 
-            foreach ((int id, List<ItemOptionsConstant> itemOptions) in itemOptionsConstant)
-            {
-               
-                ItemOptionConstant[id] = new()
-                {
+            foreach ((int id, List<ItemOptionsConstant> itemOptions) in itemOptionsConstant) {
+
+                ItemOptionConstant[id] = new() {
                     Id = id,
                     ItemOptions = itemOptions
                 };
@@ -402,14 +387,12 @@ public static class ItemOptionConstantParser
         }
     }
 
-    public static ItemOptionsConstant? GetMetadata(int id, int rarity)
-    {
+    public static ItemOptionsConstant? GetMetadata(int id, int rarity) {
         ItemOptionConstantMetadata? metadata = ItemOptionConstant.Values.FirstOrDefault(x => x.Id == id);
         return metadata?.ItemOptions.FirstOrDefault(x => x.Rarity == rarity);
     }
-    
-    public static ItemOptionConstantMetadata? GetMetadata(int id)
-    {
+
+    public static ItemOptionConstantMetadata? GetMetadata(int id) {
         return ItemOptionConstant.Values.FirstOrDefault(x => x.Id == id);
     }
 }

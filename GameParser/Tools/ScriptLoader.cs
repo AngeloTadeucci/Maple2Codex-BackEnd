@@ -4,8 +4,7 @@ using MoonSharp.Interpreter;
 
 namespace GameParser.Tools;
 
-public static class ScriptLoader
-{
+public static class ScriptLoader {
     private static readonly ConcurrentDictionary<string, Script> Scripts = new();
 
     /// <summary>
@@ -13,22 +12,18 @@ public static class ScriptLoader
     /// If a session is provided, it'll create a new script every time.
     /// </summary>
     /// <returns><see cref="Script"/></returns>
-    public static Script? GetScript(string scriptName)
-    {
+    public static Script? GetScript(string scriptName) {
         // If session is null, use the cached script.
-        if (Scripts.TryGetValue(scriptName, out Script? script))
-        {
+        if (Scripts.TryGetValue(scriptName, out Script? script)) {
             return script;
         }
 
         // If the script is not in the cache, create a new script.
-        if (!NewScript(scriptName, out script))
-        {
+        if (!NewScript(scriptName, out script)) {
             return null;
         }
 
-        if (script == null)
-        {
+        if (script == null) {
             return null;
         }
 
@@ -40,40 +35,30 @@ public static class ScriptLoader
     /// Calls the specified function.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
-    public static DynValue? RunFunction(this Script script, string functionName, params object[] args)
-    {
-        if (script.Globals[functionName] == null)
-        {
+    public static DynValue? RunFunction(this Script script, string functionName, params object[] args) {
+        if (script.Globals[functionName] == null) {
             return null;
         }
 
-        try
-        {
+        try {
             return script.Call(script.Globals[functionName], args);
-        }
-        catch (Exception)
-        {
+        } catch (Exception) {
             return null;
         }
     }
 
-    private static bool NewScript(string scriptName, out Script? script)
-    {
+    private static bool NewScript(string scriptName, out Script? script) {
         script = null;
         string scriptPath = $"{Paths.ScriptsDir}/{scriptName}.lua";
-        if (!File.Exists(scriptPath))
-        {
+        if (!File.Exists(scriptPath)) {
             return false;
         }
 
         script = new();
 
-        try
-        {
+        try {
             script.DoFile(scriptPath);
-        }
-        catch (Exception )
-        {
+        } catch (Exception) {
             return false;
         }
 

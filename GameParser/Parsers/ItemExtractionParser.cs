@@ -5,35 +5,27 @@ using Maple2Storage.Types.Metadata;
 
 namespace GameParser.Parsers;
 
-public static class ItemExtractionParser
-{
-    private static readonly Dictionary<int, ItemExtractionMetadata> ItemExtractionMetadatas = new();
+public static class ItemExtractionParser {
+    private static readonly Dictionary<int, ItemExtractionMetadata> ItemExtractionMetadatas = [];
 
-    static ItemExtractionParser()
-    {
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files)
-        {
-            if (!entry.Name.StartsWith("table/na/itemextraction"))
-            {
+    static ItemExtractionParser() {
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
+            if (!entry.Name.StartsWith("table/na/itemextraction")) {
                 continue;
             }
 
             XmlDocument? document = Paths.XmlReader.GetXmlDocument(entry);
             XmlNodeList? nodes = document.SelectNodes("/ms2/key");
-            if (nodes is null)
-            {
+            if (nodes is null) {
                 throw new("Failed to load itemextraction.xml");
             }
 
-            foreach (XmlNode node in nodes)
-            {
-                if (node?.Attributes is null)
-                {
+            foreach (XmlNode node in nodes) {
+                if (node?.Attributes is null) {
                     continue;
                 }
 
-                ItemExtractionMetadata metadata = new()
-                {
+                ItemExtractionMetadata metadata = new() {
                     SourceItemId = int.Parse(node.Attributes["TargetItemID"]?.Value ??
                                              throw new("Failed to load itemextraction.xml")),
                     TryCount = byte.Parse(node.Attributes["TryCount"]?.Value ??
@@ -49,8 +41,7 @@ public static class ItemExtractionParser
         }
     }
 
-    public static ItemExtractionMetadata? GetMetadata(int itemId)
-    {
+    public static ItemExtractionMetadata? GetMetadata(int itemId) {
         return ItemExtractionMetadatas.GetValueOrDefault(itemId);
     }
 }

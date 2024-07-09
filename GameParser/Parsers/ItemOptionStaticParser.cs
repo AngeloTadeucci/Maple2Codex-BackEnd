@@ -7,35 +7,27 @@ using Maple2Storage.Types.Metadata;
 
 namespace GameParser.Parsers;
 
-public class ItemOptionStaticParser
-{
-    private static readonly Dictionary<int, ItemOptionStaticMetadata> ItemOptionStatic = new();
+public class ItemOptionStaticParser {
+    private static readonly Dictionary<int, ItemOptionStaticMetadata> ItemOptionStatic = [];
 
-    static ItemOptionStaticParser()
-    {
-        Dictionary<int, List<ItemOptionsStatic>> itemOptionsStatic = new();
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files)
-        {
-            if (!entry.Name.StartsWith("itemoption/option/static"))
-            {
+    static ItemOptionStaticParser() {
+        Dictionary<int, List<ItemOptionsStatic>> itemOptionsStatic = [];
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
+            if (!entry.Name.StartsWith("itemoption/option/static")) {
                 continue;
             }
 
             XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(entry);
             XmlNodeList? nodeList = innerDocument.SelectNodes("/ms2/option");
-            if (nodeList is null)
-            {
+            if (nodeList is null) {
                 throw new("Failed to load itemoption/option/static.xml");
             }
-            foreach (XmlNode node in nodeList)
-            {
+            foreach (XmlNode node in nodeList) {
                 _ = int.TryParse(node.Attributes?["code"]?.Value ?? "0", out int id);
                 ItemOptionsStatic optionsStatic = new();
 
-                foreach (XmlNode item in node.Attributes!)
-                {
-                    switch (item.Name)
-                    {
+                foreach (XmlNode item in node.Attributes!) {
+                    switch (item.Name) {
                         case "grade":
                             _ = byte.TryParse(node.Attributes["grade"]?.Value ?? "0", out optionsStatic.Rarity);
                             break;
@@ -332,38 +324,31 @@ public class ItemOptionStaticParser
                     }
                 }
 
-                if (itemOptionsStatic.TryGetValue(id, out List<ItemOptionsStatic>? options))
-                {
+                if (itemOptionsStatic.TryGetValue(id, out List<ItemOptionsStatic>? options)) {
                     options.Add(optionsStatic);
-                }
-                else
-                {
-                    itemOptionsStatic[id] = new()
-                    {
+                } else {
+                    itemOptionsStatic[id] =
+                    [
                         optionsStatic
-                    };
+                    ];
                 }
             }
 
-            foreach ((int id, List<ItemOptionsStatic> itemOptions) in itemOptionsStatic)
-            {
-                ItemOptionStatic[id] = new()
-                {
+            foreach ((int id, List<ItemOptionsStatic> itemOptions) in itemOptionsStatic) {
+                ItemOptionStatic[id] = new() {
                     Id = id,
                     ItemOptions = itemOptions
                 };
             }
         }
     }
-    
-    public static ItemOptionsStatic? GetMetadata(int id, int rarity)
-    {
+
+    public static ItemOptionsStatic? GetMetadata(int id, int rarity) {
         ItemOptionStaticMetadata? metadata = ItemOptionStatic.Values.FirstOrDefault(x => x.Id == id);
         return metadata?.ItemOptions.FirstOrDefault(x => x.Rarity == rarity);
     }
-    
-    public static ItemOptionStaticMetadata? GetMetadata(int id)
-    {
+
+    public static ItemOptionStaticMetadata? GetMetadata(int id) {
         return ItemOptionStatic.Values.FirstOrDefault(x => x.Id == id);
     }
 }
