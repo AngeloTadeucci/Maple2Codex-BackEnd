@@ -21,8 +21,7 @@ const string quote = "\"";
 string[] textures = Directory.GetFileSystemEntries(texturesDir, "*.dds", SearchOption.AllDirectories);
 string[] models = Directory.GetFileSystemEntries(modelDir, "*.nif", SearchOption.AllDirectories);
 
-foreach (string modelPath in models)
-{
+foreach (string modelPath in models) {
     string fileName = Path.GetFileNameWithoutExtension(modelPath);
     string outputFolder = new(Path.Combine(output, fileName));
     Directory.CreateDirectory(outputFolder);
@@ -40,17 +39,13 @@ foreach (string modelPath in models)
     //
     // continue;
 
-    try
-    {
+    try {
         Console.WriteLine($"Converting {fileName} nif to gltf");
 
         // check if gltf already exists
-        if (File.Exists(@$"{output}\{fileName}\{fileName}.gltf"))
-        {
+        if (File.Exists(@$"{output}\{fileName}\{fileName}.gltf")) {
             Console.WriteLine("Skipping " + fileName + " base model.");
-        }
-        else
-        {
+        } else {
             string strCmdText2 = @$"/C noesis.exe ?cmode {quote}{modelPath}{quote} {quote}{output}\{fileName}\{fileName}.gltf{quote}";
             Process? process2 = Process.Start("CMD.exe", strCmdText2);
             // wait for process to finish
@@ -60,8 +55,7 @@ foreach (string modelPath in models)
         }
 
         // Only do animations for NPC folder
-        if (!directoryName.Contains("Npc"))
-        {
+        if (!directoryName.Contains("Npc")) {
             continue;
         }
 
@@ -70,18 +64,12 @@ foreach (string modelPath in models)
 
         // find kf files that match file name
         string[] animations = Directory.GetFileSystemEntries(directoryName, "*.kf", SearchOption.TopDirectoryOnly);
-        foreach (string animation in animations)
-        {
+        foreach (string animation in animations) {
             string animationName = Path.GetFileNameWithoutExtension(animation);
 
             Console.WriteLine($"Converting {fileName} kf to gltf");
-            // check if gltf already exists
-            if (File.Exists(@$"{output}\{fileName}\{animationName}.gltf"))
-            {
-                Console.WriteLine("Skipping " + fileName + " animation.");
-            }
-            else
-            {
+            // check if gltf dont exists
+            if (!File.Exists(@$"{output}\{fileName}\{animationName}.gltf")) {
                 // CD into input directory
                 string cdCmdText = $"/C cd /d {quote}{directoryName}{quote}";
                 string strCmdText = @$"{cdCmdText} && noesis.exe ?cmode {quote}{animation}{quote} {quote}{output}\{fileName}\{animationName}.gltf{quote}";
@@ -96,8 +84,7 @@ foreach (string modelPath in models)
                 ).ToArray();
 
                 // check if animations and base count match if not continue
-                if (animationTextures.Length != baseTextures.Length)
-                {
+                if (animationTextures.Length != baseTextures.Length) {
                     Console.WriteLine("Skipping cleanup of " + fileName + " animation.");
                     continue;
                 }
@@ -105,8 +92,7 @@ foreach (string modelPath in models)
                 // open gltf file, rename textures to use base texture for all animations
                 string gltfPath = @$"{output}\{fileName}\{animationName}.gltf";
                 string gltf = File.ReadAllText(gltfPath);
-                for (int i = 0; i < animationTextures.Length; i++)
-                {
+                for (int i = 0; i < animationTextures.Length; i++) {
                     string animationTexture = Path.GetFileName(animationTextures[i]);
                     string baseTexture = Path.GetFileName(baseTextures[i]);
                     gltf = gltf.Replace(animationTexture, baseTexture);
@@ -115,23 +101,21 @@ foreach (string modelPath in models)
                 File.WriteAllText(gltfPath, gltf);
 
                 // delete animation textures
-                foreach (string animationTexture in animationTextures)
-                {
+                foreach (string animationTexture in animationTextures) {
                     File.Delete(animationTexture);
                 }
 
                 Console.WriteLine("Finished converting " + animationName + " animation.");
+            } else {
+                Console.WriteLine("Skipping " + fileName + " animation.");
             }
         }
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
         Console.WriteLine(e);
         throw;
     }
 
-    void GetTexturesFromNif()
-    {
+    void GetTexturesFromNif() {
         byte[] fileBytes = File.ReadAllBytes(modelPath);
         PacketReader reader = new(fileBytes);
         reader.Skip(39);
@@ -144,8 +128,7 @@ foreach (string modelPath in models)
         reader.Skip(metadataSize);
 
         short count = reader.ReadShort();
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             reader.ReadString();
         }
 
@@ -154,20 +137,16 @@ foreach (string modelPath in models)
         int count2 = reader.ReadInt();
         reader.Skip(4);
         List<string> ddsFiles = new();
-        for (int i = 0; i < count2; i++)
-        {
+        for (int i = 0; i < count2; i++) {
             string values = reader.ReadString();
-            if (values.Contains(".dds", StringComparison.OrdinalIgnoreCase))
-            {
+            if (values.Contains(".dds", StringComparison.OrdinalIgnoreCase)) {
                 ddsFiles.Add(values);
             }
         }
 
-        foreach (string ddsFile in ddsFiles)
-        {
+        foreach (string ddsFile in ddsFiles) {
             string? file = textures.FirstOrDefault(x => x.Contains(ddsFile, StringComparison.OrdinalIgnoreCase));
-            if (file is null)
-            {
+            if (file is null) {
                 continue;
             }
 
@@ -175,8 +154,7 @@ foreach (string modelPath in models)
             string path = directoryName;
 
             string destFileName = path + '\\' + file.Split('\\').Last();
-            if (File.Exists(destFileName))
-            {
+            if (File.Exists(destFileName)) {
                 continue;
             }
 
