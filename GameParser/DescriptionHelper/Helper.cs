@@ -6,6 +6,7 @@ namespace GameParser.DescriptionHelper;
 public static class Helper {
     public static string FixDescription(string description) {
         MatchCollection matches = Regex.Matches(description, @"\$[a-zA-Z]+:[0-9]+\$");
+        // Lizards of $map:02000004$
 
         if (matches.Count == 0) {
             return description;
