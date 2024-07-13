@@ -194,45 +194,12 @@ public static class ItemParser {
     }
 
     public static ItemType GetItemType(int id) {
-        //TODO: Find a better method to find the item type
-        return (id / 100000) switch {
-            112 => ItemType.Earring,
-            113 => ItemType.Hat,
-            114 => ItemType.Clothes,
-            115 => ItemType.Pants,
-            116 => ItemType.Gloves,
-            117 => ItemType.Shoes,
-            118 => ItemType.Cape,
-            119 => ItemType.Necklace,
-            120 => ItemType.Ring,
-            121 => ItemType.Belt,
-            122 => ItemType.Overall,
-            130 => ItemType.Bludgeon,
-            131 => ItemType.Dagger,
-            132 => ItemType.Longsword,
-            133 => ItemType.Scepter,
-            134 => ItemType.ThrowingStar,
-            140 => ItemType.Spellbook,
-            141 => ItemType.Shield,
-            150 => ItemType.Greatsword,
-            151 => ItemType.Bow,
-            152 => ItemType.Staff,
-            153 => ItemType.Cannon,
-            154 => ItemType.Blade,
-            155 => ItemType.Knuckle,
-            156 => ItemType.Orb,
-            209 => ItemType.Medal,
-            410 or 420 or 430 => ItemType.Lapenshard,
-            501 or 502 or 503 or 504 or 505 => ItemType.Furnishing,
-            600 => ItemType.Pet,
-            900 => ItemType.Currency,
-            _ => ItemType.None
-        };
+        return new ItemType(id);
     }
 
     public static int GetGearScore(Item item) {
         Script? script = ScriptLoader.GetScript("Functions/calcItemValues");
-        DynValue? result = script?.RunFunction("calcItemGearScore", item.GearScoreValue, item.Rarity, (int) item.Type, 0, 0);
+        DynValue? result = script?.RunFunction("calcItemGearScore", item.GearScoreValue, item.Rarity, (int) item.Type.Type, 0, 0);
 
         if (result is null) {
             return 0;

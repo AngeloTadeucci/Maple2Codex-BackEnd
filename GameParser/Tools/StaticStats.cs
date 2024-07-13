@@ -118,7 +118,7 @@ public static class StaticStats {
                 return (0, 0);
         }
 
-        DynValue? result = script.RunFunction(calcScript, currentStatValue, staticPick.DeviationValue, (int) item.Type,
+        DynValue? result = script.RunFunction(calcScript, currentStatValue, staticPick.DeviationValue, (int) item.Type.Type,
             item.RecommendJobs.First(), optionLevelFactor, item.Rarity, item.Level);
 
         if (result is null) {
