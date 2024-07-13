@@ -1,7 +1,10 @@
 ﻿using GameParser;
 using GameParser.Parsers;
+using Maple2Storage.Tools;
 using Maple2Storage.Types;
 using MySql.Data.MySqlClient;
+
+DotEnv.Load();
 
 CreateDatabase();
 
