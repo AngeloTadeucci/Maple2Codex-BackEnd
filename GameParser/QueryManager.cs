@@ -36,7 +36,7 @@ public static class QueryManager {
         }
     }
 
-    private static MySqlConnection Connection() {
+    public static MySqlConnection Connection() {
         return new(ConnectionString);
     }
 

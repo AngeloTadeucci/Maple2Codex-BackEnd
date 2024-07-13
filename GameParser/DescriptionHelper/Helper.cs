@@ -3,27 +3,34 @@ using GameParser.Parsers;
 
 namespace GameParser.DescriptionHelper;
 
-public static class Helper {
-    public static string FixDescription(string description) {
+public static class Helper
+{
+    public static string FixDescription(string description)
+    {
         MatchCollection matches = Regex.Matches(description, @"\$[a-zA-Z]+:[0-9]+\$");
 
-        if (matches.Count == 0) {
+        if (matches.Count == 0)
+        {
             return description;
         }
 
-        foreach (Match? match in matches) {
-            if (string.IsNullOrEmpty(match?.ToString())) {
+        foreach (Match? match in matches)
+        {
+            if (string.IsNullOrEmpty(match?.ToString()))
+            {
                 continue;
             }
 
             string matchString = match.ToString()!;
             string[] split = matchString.Replace("$", string.Empty).Split(':');
             string key = split[0];
-            if (!int.TryParse(split[1], out int value)) {
+            if (!int.TryParse(split[1], out int value))
+            {
                 continue;
             }
 
-            switch (key) {
+            switch (key)
+            {
                 case "map":
                     string mapName = MapNameParser.MapNames.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, mapName);

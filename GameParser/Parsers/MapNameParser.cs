@@ -1,28 +1,36 @@
-﻿using System.Xml;
+﻿using System.Text.Json;
+using System.Xml;
+using Maple2.File.Parser.Tools;
+using Maple2.File.Parser.Xml.Map;
 using Maple2Storage.Types;
+using SqlKata.Execution;
 
 namespace GameParser.Parsers;
-
 public static class MapNameParser {
-    public static readonly Dictionary<int, string> MapNames = [];
+    public static Dictionary<int, string> MapNames { get; private set; } = new Dictionary<int, string>();
 
     static MapNameParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/mapname.xml")));
-
-        if (xmlFile is null) {
-            throw new("Failed to load mapname.xml");
-        }
-
-        XmlNodeList? nodes = xmlFile.SelectNodes("/ms2/key");
-        if (nodes is null) {
-            throw new("Failed to load mapname.xml");
-        }
-
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? "0");
-            string name = node.Attributes?["name"]?.Value ?? "";
-
+        Filter.Load(Paths.XmlReader, "NA", "Live");
+        Maple2.File.Parser.MapParser parser = new(Paths.XmlReader);
+        foreach ((int id, string? name, MapData _) in parser.Parse()) {
             MapNames[id] = name;
+        }
+    }
+
+    public static void Parse() {
+        JsonSerializerOptions options = new() {
+            IncludeFields = true,
+        };
+
+        Filter.Load(Paths.XmlReader, "NA", "Live");
+        Maple2.File.Parser.MapParser parser = new(Paths.XmlReader);
+        foreach ((int id, string? name, MapData _) in parser.Parse()) {
+            Console.WriteLine($"Parsing Map {id} - {name}");
+
+            QueryManager.QueryFactory.Query("maps").Insert(new {
+                id,
+                name = string.IsNullOrEmpty(name) ? "" : name,
+            });
         }
     }
 }
