@@ -9,10 +9,10 @@ public static class NpcNameParser {
     public static readonly Dictionary<int, string> NpcTitles = [];
 
     static NpcNameParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/npcname.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/npcname.xml")));
         XmlDocument? xmlFilePlural =
-            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/npcnameplural.xml")));
-        XmlDocument? xmlFileTitles = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/npctitle.xml")));
+            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/npcnameplural.xml")));
+        XmlDocument? xmlFileTitles = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/npctitle.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load itemname.xml");

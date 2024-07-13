@@ -7,7 +7,7 @@ public static class MapNameParser {
     public static readonly Dictionary<int, string> MapNames = [];
 
     static MapNameParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/mapname.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/mapname.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load mapname.xml");

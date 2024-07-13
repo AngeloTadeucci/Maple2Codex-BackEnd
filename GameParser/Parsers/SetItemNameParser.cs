@@ -8,7 +8,7 @@ public static class SetItemNameParser {
 
     static SetItemNameParser() {
         XmlDocument? xmlFile =
-            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/setitemname.xml")));
+            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/setitemname.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load setitemname.xml");

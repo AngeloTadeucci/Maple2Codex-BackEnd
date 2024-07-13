@@ -244,7 +244,7 @@ public static class ItemParser {
     private static Dictionary<int, (string tooltip, string guide, string main)> ParseItemDescriptions() {
         Dictionary<int, (string tooltip, string guide, string main)> descriptions = [];
         XmlDocument? xmlFile =
-            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/koritemdescription.xml")));
+            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/koritemdescription.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load koritemdescription.xml");
