@@ -17,7 +17,7 @@ public static class Helper {
             }
 
             string matchString = match.ToString()!;
-            string[] split = matchString.Replace("$", "").Split(':');
+            string[] split = matchString.Replace("$", string.Empty).Split(':');
             string key = split[0];
             if (!int.TryParse(split[1], out int value)) {
                 continue;
@@ -25,42 +25,42 @@ public static class Helper {
 
             switch (key) {
                 case "map":
-                    string mapName = MapNameParser.MapNames.GetValueOrDefault(value) ?? "";
+                    string mapName = MapNameParser.MapNames.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, mapName);
                     break;
 
                 case "item":
-                    string itemName = ItemNameParser.ItemNames.GetValueOrDefault(value) ?? "";
+                    string itemName = ItemNameParser.ItemNames.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, itemName);
                     break;
                 case "itemPlural":
-                    string itemNamePlural = ItemNameParser.ItemNamesPlural.GetValueOrDefault(value) ?? "";
+                    string itemNamePlural = ItemNameParser.ItemNamesPlural.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, itemNamePlural);
                     break;
                 case "npc":
                 case "npcName":
-                    string npcName = NpcNameParser.NpcNames.GetValueOrDefault(value) ?? "";
+                    string npcName = NpcNameParser.NpcNames.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, npcName);
                     break;
 
                 case "npcPlural":
                 case "npcNamePlural":
-                    string npcNamePlural = NpcNameParser.NpcNamesPlural.GetValueOrDefault(value) ?? "";
+                    string npcNamePlural = NpcNameParser.NpcNamesPlural.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, npcNamePlural);
                     break;
 
                 case "npcTitle":
-                    string npcTitle = NpcNameParser.NpcTitles.GetValueOrDefault(value) ?? "";
+                    string npcTitle = NpcNameParser.NpcTitles.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, npcTitle);
                     break;
 
                 case "quest":
-                    string questName = QuestNameParser.QuestNames.GetValueOrDefault(value)?.Name ?? "";
+                    string questName = QuestNameParser.QuestNames.GetValueOrDefault(value)?.Name ?? string.Empty;
                     description = description.Replace(matchString, questName);
                     break;
 
                 case "skill":
-                    string skillName = SkillNameParser.SkillNames.GetValueOrDefault(value) ?? "";
+                    string skillName = SkillNameParser.SkillNames.GetValueOrDefault(value) ?? string.Empty;
                     description = description.Replace(matchString, skillName);
                     break;
 

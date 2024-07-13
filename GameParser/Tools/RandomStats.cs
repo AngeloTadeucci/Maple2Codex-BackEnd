@@ -26,11 +26,11 @@ public static class RandomStats {
         }
     }
 
-    private static IEnumerable<StatRange> RollStats(ItemOptionRandom randomOptions, Item item) {
+    private static List<StatRange> RollStats(ItemOptionRandom randomOptions, Item item) {
         List<StatRange> itemStats = [];
 
+        Dictionary<StatAttribute, List<ParserStat>> rangeDictionary = GetRange(item);
         foreach (ParserStat? stat in randomOptions.Stats) {
-            Dictionary<StatAttribute, List<ParserStat>> rangeDictionary = GetRange(item);
             if (!rangeDictionary.ContainsKey(stat.Attribute)) {
                 continue;
             }
@@ -56,13 +56,13 @@ public static class RandomStats {
             itemStats.Add(normalStat);
         }
 
+        Dictionary<StatAttribute, List<ParserSpecialStat>> specialRanges = GetSpecialRange(item);
         foreach (ParserSpecialStat? stat in randomOptions.SpecialStats) {
-            Dictionary<StatAttribute, List<ParserSpecialStat>> rangeDictionary = GetSpecialRange(item);
             if (!rangeDictionary.ContainsKey(stat.Attribute)) {
                 continue;
             }
 
-            List<ParserSpecialStat> parserSpecialStats = rangeDictionary[stat.Attribute];
+            List<ParserSpecialStat> parserSpecialStats = specialRanges[stat.Attribute];
             ParserSpecialStat parserSpecialStatMin = parserSpecialStats[RollMinMax(item, true)];
             ParserSpecialStat parserSpecialStatMax = parserSpecialStats[RollMinMax(item, false)];
             StatRange specialStat = new() {
@@ -116,35 +116,6 @@ public static class RandomStats {
         }
 
         return ItemOptionRangeParser.GetPetSpecialRanges();
-    }
-
-    // Returns index 0~7 for equip level 70-
-    // Returns index 8~15 for equip level 70+
-    private static int Roll(Item item) {
-        Random random = Random.Shared;
-        if (item.OptionLevelFactor >= 70) {
-            return random.NextDouble() switch {
-                >= 0.0 and < 0.24 => 8,
-                >= 0.24 and < 0.48 => 9,
-                >= 0.48 and < 0.74 => 10,
-                >= 0.74 and < 0.9 => 11,
-                >= 0.9 and < 0.966 => 12,
-                >= 0.966 and < 0.985 => 13,
-                >= 0.985 and < 0.9975 => 14,
-                _ => 15
-            };
-        }
-
-        return random.NextDouble() switch {
-            >= 0.0 and < 0.24 => 0,
-            >= 0.24 and < 0.48 => 1,
-            >= 0.48 and < 0.74 => 2,
-            >= 0.74 and < 0.9 => 3,
-            >= 0.9 and < 0.966 => 4,
-            >= 0.966 and < 0.985 => 5,
-            >= 0.985 and < 0.9975 => 6,
-            _ => 7
-        };
     }
 
     private static int RollMinMax(Item item, bool minRoll) {

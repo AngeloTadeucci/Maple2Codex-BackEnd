@@ -22,7 +22,7 @@ public static class SetItemInfoParser {
             }
             foreach (XmlNode node in nodeList) {
                 int id = int.Parse(node.Attributes!["id"]?.Value ?? throw new("Failed to load setiteminfo.xml"));
-                int[] itemIds = node.Attributes["itemIDs"]?.Value.SplitAndParseToInt(',').ToArray() ?? Array.Empty<int>();
+                int[] itemIds = node.Attributes["itemIDs"]?.Value.SplitAndParseToInt(',').ToArray() ?? [];
                 int optionId = int.Parse(node.Attributes["optionID"]?.Value ?? "0");
 
                 SetItemInfo[id] = new() {

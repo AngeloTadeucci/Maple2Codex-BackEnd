@@ -26,11 +26,6 @@ public static class ItemParser {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.ItemParser parser = new(Paths.XmlReader);
 
-        Dictionary<int, string> itemNames = [];
-        foreach ((int id, string? name, ItemData _) in parser.Parse()) {
-            itemNames[id] = name;
-        }
-
         foreach ((int id, string? name, ItemData? data) in parser.Parse()) {
             Console.WriteLine($"Parsing item {id} - {name}");
             Limit? limit = data.limit;
@@ -70,20 +65,20 @@ public static class ItemParser {
 
             Item item = new(id, rarity, jobLimit, GetItemType(id), limit.levelLimit, data.option.constant,
                 data.option.@static, data.option.optionID, (int) data.option.optionLevelFactor, data.option.random, itemSlot, property.gearScore);
+
             StatsParser.ParseStats(item,
                 out List<(Stat stat, string description)> constantStats,
                 out List<(StatRange stat, string description)> staticStats,
                 out List<(StatRange stat, string description)> randomStats,
                 out int randomStatCount);
 
-            JsonSerializerOptions options = new() {
-                IncludeFields = true,
-            };
+
+
             SetItemInfoMetadata? setInfo = SetItemInfoParser.GetMetadata(id);
             List<(string itemNames, int id)> setData = [];
             if (setInfo is not null) {
                 foreach (int itemId in setInfo.ItemIds) {
-                    setData.Add((itemNames[itemId], itemId));
+                    setData.Add((ItemNameParser.ItemNames.TryGetValue(itemId, out string? itemName) ? itemName : "", itemId));
                 }
             }
 
@@ -110,6 +105,8 @@ public static class ItemParser {
                         break;
                     }
             }
+
+            List<(int id, short level)> additionalEffects = additionalEffect.id.Zip(additionalEffect.level, (id, level) => (id, level)).ToList();
 
             QueryManager.QueryFactory.Query("items").Insert(new {
                 id,
@@ -139,7 +136,7 @@ public static class ItemParser {
                 stack_limit = property.slotMax,
                 tradeable_count = property.tradableCount,
                 repackage_limit = property.rePackingLimitCount,
-                repackage_scrolls = string.Join(",", property.globalRePackingScrollID ?? Array.Empty<int>()),
+                repackage_scrolls = string.Join(",", property.globalRePackingScrollID ?? []),
                 repackage_count = property.globalRePackingItemConsumeCount ?? 0,
                 sell_price = JsonSerializer.Serialize(property.sell.price.ToList()),
                 kfms = JsonSerializer.Serialize(kfms),
@@ -148,19 +145,20 @@ public static class ItemParser {
                 remake_disable = property.remakeDisable,
                 enchantable = limit.exceptEnchant,
                 dyeable = customize?.color == 1,
-                constants_stats = JsonSerializer.Serialize(constantStats, options),
-                static_stats = JsonSerializer.Serialize(staticStats, options),
-                random_stats = JsonSerializer.Serialize(randomStats, options),
+                constants_stats = JsonSerializer.Serialize(constantStats, SerializeOptions.Options),
+                static_stats = JsonSerializer.Serialize(staticStats, SerializeOptions.Options),
+                random_stats = JsonSerializer.Serialize(randomStats, SerializeOptions.Options),
                 random_stat_count = randomStatCount,
                 gear_score = GetGearScore(item),
                 slot = itemSlot,
-                set_info = JsonSerializer.Serialize(setData, options),
+                set_info = JsonSerializer.Serialize(setData, SerializeOptions.Options),
                 set_name = setName,
                 item_preset = preset,
                 glamour_count = ItemExtractionParser.GetMetadata(id)?.TryCount ?? 0,
                 box_id = boxId,
                 item_type = property.type,
                 represent_option = property.representOption,
+                additional_effects = JsonSerializer.Serialize(additionalEffects, SerializeOptions.Options),
             });
         }
     }

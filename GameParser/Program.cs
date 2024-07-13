@@ -17,6 +17,9 @@ ItemDropParser.Parse();
 Console.WriteLine("Parsing npcs...");
 NpcParser.Parse();
 
+Console.WriteLine("Parsing AdditionalEffects...");
+AdditionalEffectParser.Parse();
+
 Console.WriteLine("Finished!");
 
 static void CreateDatabase() {
