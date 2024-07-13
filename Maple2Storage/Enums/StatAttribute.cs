@@ -1,8 +1,7 @@
 ﻿namespace Maple2Storage.Enums;
 
 // Player Stats in Packet Order - Count: 35 (0x23)
-public enum StatAttribute : short
-{
+public enum StatAttribute : short {
     Str = 0,
     Dex = 1,
     Int = 2,
@@ -205,8 +204,7 @@ public enum StatAttribute : short
     HealthBasedDamageReduce = 11163
 }
 
-public enum StatAttributeType
-{
+public enum StatAttributeType {
     Rate,
     Flat
 }

@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class JobMetadata
-{
+public class JobMetadata {
     [XmlElement(Order = 1)]
     public int JobId;
     [XmlElement(Order = 2)]
@@ -22,8 +21,7 @@ public class JobMetadata
 }
 
 [XmlType]
-public class TutorialItemMetadata
-{
+public class TutorialItemMetadata {
     [XmlElement(Order = 1)]
     public int ItemId;
     [XmlElement(Order = 2)]
@@ -33,8 +31,7 @@ public class TutorialItemMetadata
 }
 
 [XmlType]
-public class JobSkillMetadata
-{
+public class JobSkillMetadata {
     [XmlElement(Order = 1)]
     public int SkillId;
     [XmlElement(Order = 2)]
@@ -48,8 +45,7 @@ public class JobSkillMetadata
 
     public JobSkillMetadata() { }
 
-    public JobSkillMetadata(int skillId, short subJobCode, byte maxLevel, List<int> subSkillIds, byte quickSlotPriority)
-    {
+    public JobSkillMetadata(int skillId, short subJobCode, byte maxLevel, List<int> subSkillIds, byte quickSlotPriority) {
         SkillId = skillId;
         SubJobCode = subJobCode;
         MaxLevel = maxLevel;
@@ -59,8 +55,7 @@ public class JobSkillMetadata
 }
 
 [XmlType]
-public class JobLearnedSkillsMetadata
-{
+public class JobLearnedSkillsMetadata {
     [XmlElement(Order = 1)]
     public int Level;
     [XmlElement(Order = 2)]

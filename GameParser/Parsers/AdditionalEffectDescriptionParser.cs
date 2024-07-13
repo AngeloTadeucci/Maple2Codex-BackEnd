@@ -1,4 +1,4 @@
-using System.Xml;
+﻿using System.Xml;
 using GameParser.DescriptionHelper;
 using Maple2Storage.Types;
 

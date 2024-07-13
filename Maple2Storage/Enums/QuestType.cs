@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum QuestType : byte
-{
+public enum QuestType : byte {
     Epic = 0,
     World = 1,
     Event = 2,

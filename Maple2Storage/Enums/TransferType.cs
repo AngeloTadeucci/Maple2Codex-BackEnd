@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum TransferType : byte
-{
+public enum TransferType : byte {
     Tradeable = 0,
     Untradeable = 1,
     BindOnLoot = 2,

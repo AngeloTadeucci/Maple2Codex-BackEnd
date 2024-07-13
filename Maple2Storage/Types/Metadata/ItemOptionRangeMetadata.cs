@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemOptionRangeMetadata
-{
+public class ItemOptionRangeMetadata {
     [XmlElement(Order = 1)]
     public ItemOptionRangeType RangeType;
     [XmlElement(Order = 2)]
@@ -15,8 +14,7 @@ public class ItemOptionRangeMetadata
 }
 
 [XmlType]
-public class ParserStat
-{
+public class ParserStat {
     [XmlElement(Order = 1)]
     public StatAttribute Attribute;
     [XmlElement(Order = 2)]
@@ -26,22 +24,19 @@ public class ParserStat
 
     public ParserStat() { }
 
-    public ParserStat(StatAttribute attribute, float value, StatAttributeType type)
-    {
+    public ParserStat(StatAttribute attribute, float value, StatAttributeType type) {
         Attribute = attribute;
         Value = value;
         AttributeType = type;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"Id: {Attribute}, Value: {Value}";
     }
 }
 
 [XmlType]
-public class ParserSpecialStat
-{
+public class ParserSpecialStat {
     [XmlElement(Order = 1)]
     public StatAttribute Attribute;
     [XmlElement(Order = 2)]
@@ -51,15 +46,13 @@ public class ParserSpecialStat
 
     public ParserSpecialStat() { }
 
-    public ParserSpecialStat(StatAttribute attribute, float value, StatAttributeType type)
-    {
+    public ParserSpecialStat(StatAttribute attribute, float value, StatAttributeType type) {
         Attribute = attribute;
         Value = value;
         AttributeType = type;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"Id: {Attribute}, Value: {Value}";
     }
 }

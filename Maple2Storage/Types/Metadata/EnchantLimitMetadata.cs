@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class EnchantLimitMetadata
-{
+public class EnchantLimitMetadata {
     [XmlElement(Order = 1)]
     public ItemType ItemType;
     [XmlElement(Order = 2)]

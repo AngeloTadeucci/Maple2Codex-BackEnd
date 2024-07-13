@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum RewardType : byte
-{
+public enum RewardType : byte {
     None = 0x0,
     itemcoloring = 0x1,
     shop_ride = 0x2,

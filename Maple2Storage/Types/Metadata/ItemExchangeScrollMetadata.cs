@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemExchangeScrollMetadata
-{
+public class ItemExchangeScrollMetadata {
     [XmlElement(Order = 1)]
     public int ExchangeId;
     [XmlElement(Order = 2)]
@@ -26,8 +25,7 @@ public class ItemExchangeScrollMetadata
     [XmlElement(Order = 10)]
     public List<ItemRequirementMetadata> ItemCost = new();
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return
             $"ItemExchangeScrollMetadata(ExchangeId:{ExchangeId},Type:{Type},RecipeId:{RecipeId},RecipeRarity:{RecipeRarity},RecipeAmount:{RecipeAmount},RewardId:{RewardId}," +
             $"RewardRarity:{RewardRarity},RewardAmount:{RewardAmount},MesoCost:{MesoCost},Content:{string.Join(",", ItemCost)}";
@@ -35,8 +33,7 @@ public class ItemExchangeScrollMetadata
 }
 
 [XmlType]
-public class ItemRequirementMetadata
-{
+public class ItemRequirementMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -46,8 +43,7 @@ public class ItemRequirementMetadata
     [XmlElement(Order = 4)]
     public string StringTag = "";
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"ItemRequirement(Id:{Id},Rarity:{Rarity},Amount:{Amount})";
     }
 }

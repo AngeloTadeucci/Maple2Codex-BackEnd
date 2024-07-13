@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum InventoryTab : byte
-{
+public enum InventoryTab : byte {
     Gear = 0,
     Outfit = 1,
     Mount = 2,

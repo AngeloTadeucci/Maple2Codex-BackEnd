@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class FieldWarMetadata
-{
+public class FieldWarMetadata {
     [XmlElement(Order = 1)]
     public int FieldWarId;
     [XmlElement(Order = 2)]

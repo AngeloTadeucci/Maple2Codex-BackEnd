@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.RegularExpressions;
 using Maple2.File.Parser.Tools;
 using Maple2.File.Parser.Xml.AdditionalEffect;

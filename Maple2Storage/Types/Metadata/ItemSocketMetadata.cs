@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemSocketMetadata
-{
+public class ItemSocketMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -14,8 +13,7 @@ public class ItemSocketMetadata
 }
 
 [XmlType]
-public class ItemSocketRarityData
-{
+public class ItemSocketRarityData {
     [XmlElement(Order = 1)]
     public int Rarity;
     [XmlElement(Order = 2)]

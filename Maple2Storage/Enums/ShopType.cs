@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum ShopType : byte
-{
+public enum ShopType : byte {
     Default = 0,
     Unk = 1,
     Star = 2,

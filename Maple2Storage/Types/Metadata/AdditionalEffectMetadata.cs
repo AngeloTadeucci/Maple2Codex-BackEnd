@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class AdditionalEffectMetadata
-{
+public class AdditionalEffectMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -13,8 +12,7 @@ public class AdditionalEffectMetadata
 }
 
 [XmlType]
-public class AdditionalEffectLevelMetadata
-{
+public class AdditionalEffectLevelMetadata {
     [XmlElement(Order = 1)]
     public EffectBeginConditionMetadata BeginCondition;
     [XmlElement(Order = 2)]
@@ -70,8 +68,7 @@ public class AdditionalEffectLevelMetadata
 }
 
 [XmlType]
-public class EffectBeginConditionMetadata
-{
+public class EffectBeginConditionMetadata {
     [XmlElement(Order = 1)]
     public EffectBeginConditionOwnerMetadata Owner;
 
@@ -80,8 +77,7 @@ public class EffectBeginConditionMetadata
 }
 
 [XmlType]
-public class EffectBeginConditionOwnerMetadata
-{
+public class EffectBeginConditionOwnerMetadata {
     [XmlElement(Order = 1)]
     public int[] EventSkillIDs;
 
@@ -93,8 +89,7 @@ public class EffectBeginConditionOwnerMetadata
 }
 
 [XmlType]
-public class EffectBasicPropertyMetadata
-{
+public class EffectBasicPropertyMetadata {
     [XmlElement(Order = 1)]
     public int MaxBuffCount;
 
@@ -127,14 +122,12 @@ public class EffectBasicPropertyMetadata
 }
 
 [XmlType]
-public class EffectMotionPropertyMetadata
-{
+public class EffectMotionPropertyMetadata {
 
 }
 
 [XmlType]
-public class EffectCancelEffectMetadata
-{
+public class EffectCancelEffectMetadata {
     [XmlElement(Order = 1)]
     public bool CancelCheckSameCaster;
     [XmlElement(Order = 2)]
@@ -146,8 +139,7 @@ public class EffectCancelEffectMetadata
 }
 
 [XmlType]
-public class EffectImmuneEffectMetadata
-{
+public class EffectImmuneEffectMetadata {
     [XmlElement(Order = 1)]
     public int[] ImmuneEffectCodes;
     [XmlElement(Order = 2)]
@@ -155,33 +147,28 @@ public class EffectImmuneEffectMetadata
 }
 
 [XmlType]
-public class EffectResetSkillCooldownTimeMetadata
-{
+public class EffectResetSkillCooldownTimeMetadata {
 
 }
 
 [XmlType]
-public class EffectModifyDurationMetadata
-{
+public class EffectModifyDurationMetadata {
 
 }
 
 [XmlType]
-public class EffectModifyOverlapCountMetadata
-{
+public class EffectModifyOverlapCountMetadata {
 
 }
 
 [XmlType]
-public class EffectStatusMetadata
-{
+public class EffectStatusMetadata {
     [XmlElement(Order = 1)]
     public Dictionary<StatAttribute, EffectStatMetadata> Stats;
 }
 
 [XmlType]
-public class EffectStatMetadata
-{
+public class EffectStatMetadata {
     [XmlElement(Order = 1)]
     public long Flat;
     [XmlElement(Order = 2)]
@@ -191,38 +178,32 @@ public class EffectStatMetadata
 }
 
 [XmlType]
-public class EffectFinalStatusMetadata
-{
+public class EffectFinalStatusMetadata {
 
 }
 
 [XmlType]
-public class EffectOffensiveMetadata
-{
+public class EffectOffensiveMetadata {
 
 }
 
 [XmlType]
-public class EffectDefesiveMetadata
-{
+public class EffectDefesiveMetadata {
 
 }
 
 [XmlType]
-public class EffectRecoveryMetadata
-{
+public class EffectRecoveryMetadata {
 
 }
 
 [XmlType]
-public class EffectExpMetadata
-{
+public class EffectExpMetadata {
 
 }
 
 [XmlType]
-public class EffectDotDamageMetadata
-{
+public class EffectDotDamageMetadata {
     [XmlElement(Order = 1)]
     public byte DamageType;
     [XmlElement(Order = 2)]
@@ -234,44 +215,37 @@ public class EffectDotDamageMetadata
 }
 
 [XmlType]
-public class EffectDotBuffMetadata
-{
+public class EffectDotBuffMetadata {
 
 }
 
 [XmlType]
-public class EffectConsumeMetadata
-{
+public class EffectConsumeMetadata {
 
 }
 
 [XmlType]
-public class EffectReflectMetadata
-{
+public class EffectReflectMetadata {
 
 }
 
 [XmlType]
-public class EffectUiMetadata
-{
+public class EffectUiMetadata {
 
 }
 
 [XmlType]
-public class EffectShieldMetadata
-{
+public class EffectShieldMetadata {
 
 }
 
 [XmlType]
-public class EffectMesoGuardMetadata
-{
+public class EffectMesoGuardMetadata {
 
 }
 
 [XmlType]
-public class EffectInvokeMetadata
-{
+public class EffectInvokeMetadata {
     [XmlElement(Order = 1)]
     public float[] Values;
     [XmlElement(Order = 2)]
@@ -289,20 +263,17 @@ public class EffectInvokeMetadata
 }
 
 [XmlType]
-public class EffectSpecialMetadata
-{
+public class EffectSpecialMetadata {
 
 }
 
 [XmlType]
-public class EffectRideMetadata
-{
+public class EffectRideMetadata {
 
 }
 
 [XmlType]
-public class EffectTriggerSkillMetadata
-{
+public class EffectTriggerSkillMetadata {
     [XmlElement(Order = 1)]
     public int[] SkillId;
 

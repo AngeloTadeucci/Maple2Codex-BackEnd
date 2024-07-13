@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class FurnishingShopMetadata
-{
+public class FurnishingShopMetadata {
     [XmlElement(Order = 1)]
     public int ItemId;
     [XmlElement(Order = 2)]
@@ -14,8 +13,7 @@ public class FurnishingShopMetadata
     [XmlElement(Order = 4)]
     public int Price;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"FurnishingShopMetadata(ItemId:{ItemId},Buyable:{Buyable},FurnishingTokenType:{FurnishingTokenType},Price:{Price})";
     }
 }

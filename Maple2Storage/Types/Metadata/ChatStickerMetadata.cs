@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ChatStickerMetadata
-{
+public class ChatStickerMetadata {
     [XmlElement(Order = 1)]
     public int StickerId;
     [XmlElement(Order = 2)]

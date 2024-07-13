@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class GachaMetadata
-{
+public class GachaMetadata {
     [XmlElement(Order = 1)]
     public int GachaId;
     [XmlElement(Order = 2)]
@@ -20,15 +19,13 @@ public class GachaMetadata
     [XmlElement(Order = 7)]
     public List<GachaContent> Contents;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"GachaMetadata:(GachaId:{GachaId},BoxGroup:{BoxGroup},DropBoxId:{DropBoxId},ShopId:{ShopId},CoinId:{CoinId},CoinAmount:{CoinAmount})";
     }
 }
 
 [XmlType]
-public class GachaContent
-{
+public class GachaContent {
     [XmlElement(Order = 1)]
     public int ItemId;
     [XmlElement(Order = 2)]
@@ -42,8 +39,7 @@ public class GachaContent
     [XmlElement(Order = 6)]
     public byte Rarity;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"GachaContent:(ItemId:{ItemId},SmartDrop:{SmartDrop},SmartGender:{SmartGender},MinAmount:{MinAmount},MaxAmount:{MaxAmount},Rarity:{Rarity})";
     }
 }

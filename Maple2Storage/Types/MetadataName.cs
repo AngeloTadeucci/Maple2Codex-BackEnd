@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Types;
 
-public static class MetadataName
-{
+public static class MetadataName {
     public const string AdBanner = "ad-banner";
     public const string AdditionalEffect = "additional-effect";
     public const string Animation = "animation";

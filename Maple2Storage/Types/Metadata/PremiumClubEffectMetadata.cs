@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class PremiumClubEffectMetadata
-{
+public class PremiumClubEffectMetadata {
     [XmlElement(Order = 1)]
     public int EffectId;
     [XmlElement(Order = 2)]

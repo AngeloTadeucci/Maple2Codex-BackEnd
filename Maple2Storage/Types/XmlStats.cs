@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types;
 
 [XmlType]
-public class XmlStats
-{
+public class XmlStats {
     [XmlElement(Order = 1)]
     public XmlStat<int> Str;
     [XmlElement(Order = 2)]
@@ -76,8 +75,7 @@ public class XmlStats
     // There's more on some other NPC but until this point, all of them have it
 }
 [XmlType]
-public struct XmlStat<T> where T : struct
-{
+public struct XmlStat<T> where T : struct {
     [XmlElement(Order = 1)]
     public T Bonus;
     [XmlElement(Order = 2)]
@@ -85,22 +83,19 @@ public struct XmlStat<T> where T : struct
     [XmlElement(Order = 3)]
     public T Total;
 
-    public T this[int i] => i switch
-    {
+    public T this[int i] => i switch {
         1 => Base,
         2 => Total,
         _ => Bonus
     };
 
-    public XmlStat(T totalStat)
-    {
+    public XmlStat(T totalStat) {
         Bonus = totalStat;
         Base = totalStat;
         Total = totalStat;
     }
 
-    public XmlStat(T bonusStat, T baseStat, T totalStat)
-    {
+    public XmlStat(T bonusStat, T baseStat, T totalStat) {
         Bonus = bonusStat;
         Base = baseStat;
         Total = totalStat;

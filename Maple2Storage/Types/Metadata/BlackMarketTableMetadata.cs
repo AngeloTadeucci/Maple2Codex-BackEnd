@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class BlackMarketTableMetadata
-{
+public class BlackMarketTableMetadata {
     [XmlElement(Order = 1)]
     public int CategoryId;
     [XmlElement(Order = 2)]

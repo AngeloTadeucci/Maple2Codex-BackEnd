@@ -1,8 +1,7 @@
 ﻿
 namespace Maple2Storage.Types;
 
-public class CustomStat
-{
+public class CustomStat {
     public long Str { get; set; }
     public long Dex { get; set; }
     public long Int { get; set; }
@@ -63,8 +62,7 @@ public class CustomStat
     public float ScaleBaseSpaRate3 { get; set; }
     public float ScaleBaseSpaRate4 { get; set; }
 
-    public CustomStat(Maple2.File.Parser.Xml.Npc.Stat stat)
-    {
+    public CustomStat(Maple2.File.Parser.Xml.Npc.Stat stat) {
         Str = stat.str;
         Dex = stat.dex;
         Int = stat.@int;

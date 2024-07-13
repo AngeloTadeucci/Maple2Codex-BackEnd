@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class GuildPropertyMetadata
-{
+public class GuildPropertyMetadata {
     [XmlElement(Order = 1)]
     public int Level;
     [XmlElement(Order = 2)]
@@ -44,8 +43,7 @@ public class GuildPropertyMetadata
     [XmlElement(Order = 19)]
     public int LoseMiniGameGuildCoin;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return
             $"GuildBuff(Level:{Level},AccumExp:{AccumExp},Capacity:{Capacity},FundMax:{FundMax},DonationMax:{DonationMax},AttendExp:{AttendExp},WinMiniGameExp:{WinMiniGameExp},LoseMiniGameExp:{LoseMiniGameExp}" +
             $",RaidGuildExp:{RaidGuildExp},AttendFunds:{AttendFunds},WinMiniGameFunds:{WinMiniGameFunds},LoseMiniGameFunds:{LoseMiniGameFunds},RaidGuildFunds:{RaidGuildFunds}," +

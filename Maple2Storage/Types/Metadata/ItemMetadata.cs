@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemMetadata
-{
+public class ItemMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -57,22 +56,19 @@ public class ItemMetadata
 }
 
 [XmlType]
-public class ItemGemMetadata
-{
+public class ItemGemMetadata {
     [XmlElement(Order = 1)]
     public GemSlot Gem;
 }
 
 [XmlType]
-public class ItemUgcMetadata
-{
+public class ItemUgcMetadata {
     [XmlElement(Order = 1)]
     public string Mesh;
 }
 
 [XmlType]
-public class ItemLifeMetadata
-{
+public class ItemLifeMetadata {
     [XmlElement(Order = 1)]
     public int DurationPeriod;
     [XmlElement(Order = 2)]
@@ -84,22 +80,19 @@ public class ItemLifeMetadata
 }
 
 [XmlType]
-public class ItemPetMetadata
-{
+public class ItemPetMetadata {
     [XmlElement(Order = 1)]
     public int PetId;
 }
 
 [XmlType]
-public class ItemBasicMetadata
-{
+public class ItemBasicMetadata {
     [XmlElement(Order = 1)]
     public string Tag;
 }
 
 [XmlType]
-public class ItemLimitMetadata
-{
+public class ItemLimitMetadata {
     [XmlElement(Order = 1)]
     public List<int> JobRequirements;
     [XmlElement(Order = 2)]
@@ -127,8 +120,7 @@ public class ItemLimitMetadata
 }
 
 [XmlType]
-public class ItemSkillMetadata
-{
+public class ItemSkillMetadata {
     [XmlElement(Order = 1)]
     public int SkillId;
     [XmlElement(Order = 2)]
@@ -136,15 +128,13 @@ public class ItemSkillMetadata
 }
 
 [XmlType]
-public class ItemFusionMetadata
-{
+public class ItemFusionMetadata {
     [XmlElement(Order = 1)]
     public bool Fusionable;
 }
 
 [XmlType]
-public class ItemInstallMetadata
-{
+public class ItemInstallMetadata {
     [XmlElement(Order = 1)]
     public bool IsCubeSolid;
     [XmlElement(Order = 2)]
@@ -152,8 +142,7 @@ public class ItemInstallMetadata
 }
 
 [XmlType]
-public class ItemPropertyMetadata
-{
+public class ItemPropertyMetadata {
     [XmlElement(Order = 1)]
     public int StackLimit;
     [XmlElement(Order = 2)]
@@ -183,8 +172,7 @@ public class ItemPropertyMetadata
 }
 
 [XmlType]
-public class ItemSellMetadata
-{
+public class ItemSellMetadata {
     [XmlElement(Order = 1)]
     public List<long> SellPrice = new();
     [XmlElement(Order = 2)]
@@ -192,8 +180,7 @@ public class ItemSellMetadata
 }
 
 [XmlType]
-public class ItemCustomizeMetadata
-{
+public class ItemCustomizeMetadata {
     [XmlElement(Order = 1)]
     public int ColorPalette;
     [XmlElement(Order = 2)]
@@ -203,8 +190,7 @@ public class ItemCustomizeMetadata
 }
 
 [XmlType]
-public class ItemFunctionMetadata
-{
+public class ItemFunctionMetadata {
     [XmlElement(Order = 1)]
     public string Name;
     [XmlElement(Order = 2)]
@@ -234,8 +220,7 @@ public class ItemFunctionMetadata
 }
 
 [XmlType]
-public class ItemOptionMetadata
-{
+public class ItemOptionMetadata {
     [XmlElement(Order = 1)]
     public int Static;
     [XmlElement(Order = 2)]
@@ -249,8 +234,7 @@ public class ItemOptionMetadata
 }
 
 [XmlType]
-public class ItemMusicMetadata
-{
+public class ItemMusicMetadata {
     [XmlElement(Order = 1)]
     public int PlayCount;
     [XmlElement(Order = 2)]
@@ -266,8 +250,7 @@ public class ItemMusicMetadata
 }
 
 [XmlType]
-public class ItemHousingMetadata
-{
+public class ItemHousingMetadata {
     [XmlElement(Order = 1)]
     public ItemHousingCategory HousingCategory;
     [XmlElement(Order = 2)]
@@ -277,15 +260,13 @@ public class ItemHousingMetadata
 }
 
 [XmlType]
-public class ItemShopMetadata
-{
+public class ItemShopMetadata {
     [XmlElement(Order = 1)]
     public int ShopId;
 }
 
 [XmlType]
-public class ItemAdditionalEffectMetadata
-{
+public class ItemAdditionalEffectMetadata {
     [XmlElement(Order = 1)]
     public int[] Id;
     [XmlElement(Order = 2)]
@@ -293,8 +274,7 @@ public class ItemAdditionalEffectMetadata
 }
 
 [XmlType]
-public class ItemBreakReward
-{
+public class ItemBreakReward {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -302,21 +282,18 @@ public class ItemBreakReward
 
     public ItemBreakReward() { }
 
-    public ItemBreakReward(int id, int count)
-    {
+    public ItemBreakReward(int id, int count) {
         Id = id;
         Count = count;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"Id: {Id}, Amount: {Count}";
     }
 }
 
 [XmlType]
-public class OpenItemBox
-{
+public class OpenItemBox {
     [XmlElement(Order = 1)]
     public int RequiredItemId;
     [XmlElement(Order = 2)]
@@ -328,8 +305,7 @@ public class OpenItemBox
 }
 
 [XmlType]
-public class SelectItemBox
-{
+public class SelectItemBox {
     [XmlElement(Order = 1)]
     public int GroupId;
     [XmlElement(Order = 2)]
@@ -337,8 +313,7 @@ public class SelectItemBox
 }
 
 [XmlType]
-public class ChatEmoticonAdd
-{
+public class ChatEmoticonAdd {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -346,8 +321,7 @@ public class ChatEmoticonAdd
 }
 
 [XmlType]
-public class OpenMassiveEvent
-{
+public class OpenMassiveEvent {
     [XmlElement(Order = 1)]
     public int FieldId;
     [XmlElement(Order = 2)]
@@ -357,22 +331,19 @@ public class OpenMassiveEvent
 }
 
 [XmlType]
-public class LevelPotion
-{
+public class LevelPotion {
     [XmlElement(Order = 1)]
     public short TargetLevel;
 }
 
 [XmlType]
-public class VIPCoupon
-{
+public class VIPCoupon {
     [XmlElement(Order = 1)]
     public int Duration;
 }
 
 [XmlType]
-public class HongBaoData
-{
+public class HongBaoData {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -384,8 +355,7 @@ public class HongBaoData
 }
 
 [XmlType]
-public class OpenCoupleEffectBox
-{
+public class OpenCoupleEffectBox {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -393,8 +363,7 @@ public class OpenCoupleEffectBox
 }
 
 [XmlType]
-public class InstallBillboard
-{
+public class InstallBillboard {
     [XmlElement(Order = 1)]
     public int InteractId;
     [XmlElement(Order = 2)]
@@ -410,16 +379,14 @@ public class InstallBillboard
     [XmlElement(Order = 7)]
     public int Duration;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"AdBalloonData(InteractId:{InteractId}, Model:{Model}, Asset:{Asset}, " +
                $"NormalState:{NormalState}, Reactable:{Reactable}, Scale:{Scale}, Duration:{Duration})";
     }
 }
 
 [XmlType]
-public class SurvivalSkin
-{
+public class SurvivalSkin {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -427,15 +394,13 @@ public class SurvivalSkin
 }
 
 [XmlType]
-public class SurvivalLevelExp
-{
+public class SurvivalLevelExp {
     [XmlElement(Order = 1)]
     public int SurvivalExp;
 }
 
 [XmlType]
-public class HairPresets
-{
+public class HairPresets {
     [XmlElement(Order = 1)]
     public CoordF BackPositionCoord;
     [XmlElement(Order = 2)]
@@ -449,8 +414,7 @@ public class HairPresets
     [XmlElement(Order = 6)]
     public float MaxScale;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"HairPreset(BackPositionCoord: {BackPositionCoord}, BackPositionRotation: {BackPositionRotation}, " +
                $"FrontPositionCoord: {FrontPositionCoord}, FrontPositionRotation: {FrontPositionRotation}), MinScale:{MinScale}, MaxScale:{MaxScale}";
     }

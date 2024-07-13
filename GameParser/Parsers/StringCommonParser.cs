@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using Maple2.File.IO.Crypto.Common;
 using Maple2Storage.Types;
 
 namespace GameParser.Parsers;

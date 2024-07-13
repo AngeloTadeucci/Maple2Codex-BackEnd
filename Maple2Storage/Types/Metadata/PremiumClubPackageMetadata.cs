@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class PremiumClubPackageMetadata
-{
+public class PremiumClubPackageMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -16,15 +15,13 @@ public class PremiumClubPackageMetadata
     [XmlElement(Order = 5)]
     public List<BonusItem> BonusItem = new();
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"PremiumClubPackage(Id:{Id},VipPeriod:{VipPeriod},Price:{Price},BuyLimit:{BuyLimit},BonusItem:{BonusItem}}}";
     }
 }
 
 [XmlType]
-public class BonusItem
-{
+public class BonusItem {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -32,8 +29,7 @@ public class BonusItem
     [XmlElement(Order = 3)]
     public short Amount;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"ItemRequirement(Id:{Id},Rarity:{Rarity},Amount:{Amount})";
     }
 }

@@ -2,11 +2,10 @@
 
 namespace Maple2Storage.Types;
 
-public static class Paths
-{
+public static class Paths {
     public static readonly string SolutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
 
     public static readonly string ScriptsDir = new(Path.Combine(SolutionDir, "Maple2Storage", "Scripts"));
-    public static readonly M2dReader XmlReader = new(Path.Combine(SolutionDir, "Maple2Storage","Resources","Xml.m2d"));
+    public static readonly M2dReader XmlReader = new(Path.Combine(SolutionDir, "Maple2Storage", "Resources", "Xml.m2d"));
 
 }

@@ -1,8 +1,7 @@
 ﻿namespace Maple2Storage.Enums;
 
 [Flags]
-public enum DialogType : byte
-{
+public enum DialogType : byte {
     None = 0,
     UI = 1,
     Talk = 2,
@@ -10,8 +9,7 @@ public enum DialogType : byte
     Options = 8,
     Cinematic = 16,
 }
-public enum ResponseSelection
-{
+public enum ResponseSelection {
     None = 0,
     Empty = 1, // no options to continue or exit
     Stop = 2, // appears "Quit:ESC" option
@@ -33,16 +31,14 @@ public enum ResponseSelection
     GetHomeTreatment = 18 // Decline - ESC || Get Treatment - Space
 }
 
-public enum ActionType : byte
-{
+public enum ActionType : byte {
     Portal = 3,
     OpenWindow = 4,
     ItemReward = 5,
     MoveMap = 99
 }
 
-public enum NpcTalkEventType : short
-{
+public enum NpcTalkEventType : short {
     Begin = 1,
     InProgress = 2,
     Result = 3

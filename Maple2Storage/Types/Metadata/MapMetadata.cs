@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class MapMetadata
-{
+public class MapMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -26,8 +25,7 @@ public class MapMetadata
 }
 
 [XmlType]
-public class MapBlock
-{
+public class MapBlock {
     [XmlElement(Order = 1)]
     public CoordS Coord;
     [XmlElement(Order = 2)]
@@ -39,8 +37,7 @@ public class MapBlock
 }
 
 [XmlType]
-public class MapProperty
-{
+public class MapProperty {
     [XmlElement(Order = 1)]
     public int RevivalReturnMapId;
     [XmlElement(Order = 2)]
@@ -64,8 +61,7 @@ public class MapProperty
 }
 
 [XmlType]
-public class MapDrop
-{
+public class MapDrop {
     [XmlElement(Order = 1)]
     public int MapLevel;
     [XmlElement(Order = 2)]
@@ -75,8 +71,7 @@ public class MapDrop
 }
 
 [XmlType]
-public class MapCashCall
-{
+public class MapCashCall {
     [XmlElement(Order = 1)]
     public bool DisableExitWithTaxi;
     [XmlElement(Order = 2)]
@@ -90,8 +85,7 @@ public class MapCashCall
 }
 
 [XmlType]
-public class MapUi
-{
+public class MapUi {
     [XmlElement(Order = 1)]
     public bool EnableFallDamage;
     [XmlElement(Order = 2)]

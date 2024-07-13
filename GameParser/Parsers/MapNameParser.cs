@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using System.Xml;
-using Maple2.File.Parser.Tools;
+﻿using Maple2.File.Parser.Tools;
 using Maple2.File.Parser.Xml.Map;
 using Maple2Storage.Types;
 using SqlKata.Execution;
@@ -18,10 +16,6 @@ public static class MapNameParser {
     }
 
     public static void Parse() {
-        JsonSerializerOptions options = new() {
-            IncludeFields = true,
-        };
-
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.MapParser parser = new(Paths.XmlReader);
         foreach ((int id, string? name, MapData _) in parser.Parse()) {

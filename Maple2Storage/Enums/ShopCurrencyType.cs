@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum ShopCurrencyType : byte
-{
+public enum ShopCurrencyType : byte {
     Meso = 0,
     Item = 1,
     ValorToken = 2,

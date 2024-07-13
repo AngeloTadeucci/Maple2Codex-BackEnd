@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemOptionStaticMetadata
-{
+public class ItemOptionStaticMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -12,8 +11,7 @@ public class ItemOptionStaticMetadata
 }
 
 [XmlType]
-public class ItemOptionsStatic
-{
+public class ItemOptionsStatic {
     [XmlElement(Order = 1)]
     public byte Rarity;
     [XmlElement(Order = 2)]

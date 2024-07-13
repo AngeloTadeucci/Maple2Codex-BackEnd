@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class RewardContentMetadata
-{
+public class RewardContentMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -12,8 +11,7 @@ public class RewardContentMetadata
 }
 
 [XmlType]
-public class RewardContentItemMetadata
-{
+public class RewardContentItemMetadata {
     [XmlElement(Order = 1)]
     public int MinLevel;
     [XmlElement(Order = 2)]
@@ -23,8 +21,7 @@ public class RewardContentItemMetadata
 }
 
 [XmlType]
-public class RewardItemData
-{
+public class RewardItemData {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -34,8 +31,7 @@ public class RewardItemData
 
     public RewardItemData() { }
 
-    public RewardItemData(int id, int amount, int rarity)
-    {
+    public RewardItemData(int id, int amount, int rarity) {
         Id = id;
         Amount = amount;
         Rarity = rarity;

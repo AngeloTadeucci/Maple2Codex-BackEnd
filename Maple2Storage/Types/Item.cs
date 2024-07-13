@@ -2,11 +2,9 @@
 
 namespace Maple2Storage.Types;
 
-public class Item
-{
+public class Item {
     public Item(int id, int rarity, List<int> recommendJobs, ItemType type, int level, int optionConstantId, int optionStaticId, int optionId,
-        int optionLevelFactor, int randomId, ItemSlot slot, int gearScoreValue)
-    {
+        int optionLevelFactor, int randomId, ItemSlot slot, int gearScoreValue) {
         Id = id;
         Rarity = rarity;
         RecommendJobs = recommendJobs;
@@ -34,31 +32,26 @@ public class Item
     public ItemSlot Slot { get; init; }
     public int GearScoreValue { get; init; }
 
-    public static bool IsWeapon(ItemSlot slot)
-    {
+    public static bool IsWeapon(ItemSlot slot) {
         return slot is ItemSlot.RH or ItemSlot.LH or ItemSlot.OH;
     }
 
-    public static bool IsAccessory(ItemSlot slot)
-    {
+    public static bool IsAccessory(ItemSlot slot) {
         return slot is ItemSlot.FH or ItemSlot.EA or ItemSlot.PD or ItemSlot.BE or ItemSlot.RI;
     }
 
-    public static bool IsArmor(ItemSlot slot)
-    {
+    public static bool IsArmor(ItemSlot slot) {
         return slot is ItemSlot.CP or ItemSlot.CL or ItemSlot.GL or ItemSlot.SH or ItemSlot.MT;
     }
 }
 
-public class Stat
-{
+public class Stat {
     public StatAttribute ItemAttribute { get; set; }
     public StatAttributeType AttributeType { get; set; }
     public float Value { get; set; }
 }
 
-public class StatRange
-{
+public class StatRange {
     public StatAttribute ItemAttribute { get; set; }
     public StatAttributeType AttributeType { get; set; }
     public float ValueMin { get; set; }

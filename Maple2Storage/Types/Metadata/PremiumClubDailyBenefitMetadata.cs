@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class PremiumClubDailyBenefitMetadata
-{
+public class PremiumClubDailyBenefitMetadata {
     [XmlElement(Order = 1)]
     public int BenefitId;
     [XmlElement(Order = 2)]
@@ -14,8 +13,7 @@ public class PremiumClubDailyBenefitMetadata
     [XmlElement(Order = 4)]
     public short ItemAmount;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"ItemRequirement(BenefitId:{BenefitId},ItemId:{ItemId},ItemRarity:{ItemRarity},ItemAmount:{ItemAmount})";
     }
 }

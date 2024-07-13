@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class NpcMetadata
-{
+public class NpcMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -57,8 +56,7 @@ public class NpcMetadata
     [XmlElement(Order = 25)]
     public NpcMetadataCapsule NpcMetadataCapsule;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"Npc:(Id:{Id},Position:{Coord},Friendly:{Type},ShopId:{ShopId})";
     }
 
@@ -66,8 +64,7 @@ public class NpcMetadata
 }
 
 [XmlType]
-public class NpcMetadataBasic
-{
+public class NpcMetadataBasic {
     [XmlElement(Order = 1)]
     public sbyte NpcAttackGroup;
     [XmlElement(Order = 2)]
@@ -109,21 +106,18 @@ public class NpcMetadataBasic
     [XmlElement(Order = 20)]
     public string MinimapIconName;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"NpcMetadataBasic:(NpcAttackGroup:{NpcAttackGroup},NpcDefenseGroup:{NpcDefenseGroup},AttackDamage:{AttackDamage},Difficulty:{Difficulty}," +
                $"MaxSpawnCount:{MaxSpawnCount},GroupSpawnCount:{GroupSpawnCount})";
     }
 
-    public bool IsShop()
-    {
+    public bool IsShop() {
         return Kind is NpcKind.BalmyShop or NpcKind.FixedShop or NpcKind.RotatingShop;
     }
 }
 
 [XmlType]
-public class NpcMetadataSpeed
-{
+public class NpcMetadataSpeed {
     [XmlElement(Order = 1)]
     public float RotationSpeed;
     [XmlElement(Order = 2)]
@@ -133,8 +127,7 @@ public class NpcMetadataSpeed
 }
 
 [XmlType]
-public class NpcMetadataDistance
-{
+public class NpcMetadataDistance {
     [XmlElement(Order = 1)]
     public int Avoid;
     [XmlElement(Order = 2)]
@@ -152,8 +145,7 @@ public class NpcMetadataDistance
 }
 
 [XmlType]
-public class NpcMetadataSkill
-{
+public class NpcMetadataSkill {
     [XmlElement(Order = 1)]
     public int[] SkillIds = Array.Empty<int>();
     [XmlElement(Order = 2)]
@@ -167,8 +159,7 @@ public class NpcMetadataSkill
 }
 
 [XmlType]
-public class NpcMetadataEffect
-{
+public class NpcMetadataEffect {
     [XmlElement(Order = 1)]
     public int[] EffectIds = Array.Empty<int>();
     [XmlElement(Order = 2)]
@@ -178,8 +169,7 @@ public class NpcMetadataEffect
 }
 
 [XmlType]
-public class NpcMetadataCombat
-{
+public class NpcMetadataCombat {
     [XmlElement(Order = 1)]
     public uint CombatAbandonTick; // 0, or 999999
     [XmlElement(Order = 2)]
@@ -191,8 +181,7 @@ public class NpcMetadataCombat
 }
 
 [XmlType]
-public class NpcMetadataDead
-{
+public class NpcMetadataDead {
     [XmlElement(Order = 1)]
     public float Time;
     [XmlElement(Order = 2)]
@@ -200,8 +189,7 @@ public class NpcMetadataDead
 }
 
 [XmlType]
-public class NpcMetadataInteract
-{
+public class NpcMetadataInteract {
     [XmlElement(Order = 1)]
     public string InteractFunction; // UseSkill,50100501,1
     [XmlElement(Order = 2)]
@@ -211,8 +199,7 @@ public class NpcMetadataInteract
 }
 
 [XmlType]
-public class NpcMetadataCapsule
-{
+public class NpcMetadataCapsule {
     [XmlElement(Order = 1)]
     public int Radius;
 
@@ -224,8 +211,7 @@ public class NpcMetadataCapsule
 
     public NpcMetadataCapsule() { }
 
-    public NpcMetadataCapsule(int radius, int height, bool ignore)
-    {
+    public NpcMetadataCapsule(int radius, int height, bool ignore) {
         Radius = radius;
         Height = height;
         Ignore = ignore;
@@ -233,8 +219,7 @@ public class NpcMetadataCapsule
 }
 
 [XmlType]
-public class NpcMetadataModel
-{
+public class NpcMetadataModel {
     [XmlElement(Order = 1)]
     public string Model;
     [XmlElement(Order = 2)]

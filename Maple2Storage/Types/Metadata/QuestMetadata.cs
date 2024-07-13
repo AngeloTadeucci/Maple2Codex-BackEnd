@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class QuestMetadata
-{
+public class QuestMetadata {
     [XmlElement(Order = 1)]
     public QuestBasic Basic = new();
     [XmlElement(Order = 2)]
@@ -35,8 +34,7 @@ public class QuestMetadata
 }
 
 [XmlType]
-public class QuestBasic
-{
+public class QuestBasic {
     [XmlElement(Order = 1)]
     public int ChapterID;
     [XmlElement(Order = 2)]
@@ -48,8 +46,7 @@ public class QuestBasic
 }
 
 [XmlType]
-public class QuestRequire
-{
+public class QuestRequire {
     [XmlElement(Order = 1)]
     public short Level;
     [XmlElement(Order = 2)]
@@ -61,8 +58,7 @@ public class QuestRequire
 }
 
 [XmlType]
-public class QuestReward
-{
+public class QuestReward {
     [XmlElement(Order = 1)]
     public int Exp;
     [XmlElement(Order = 2)]
@@ -76,8 +72,7 @@ public class QuestReward
 }
 
 [XmlType]
-public class QuestRewardItem
-{
+public class QuestRewardItem {
     [XmlElement(Order = 1)]
     public int Code;
     [XmlElement(Order = 2)]
@@ -87,8 +82,7 @@ public class QuestRewardItem
 
     public QuestRewardItem() { }
 
-    public QuestRewardItem(int pItemId, byte pRank, int pCount)
-    {
+    public QuestRewardItem(int pItemId, byte pRank, int pCount) {
         Code = pItemId;
         Rank = pRank;
         Count = pCount;
@@ -96,8 +90,7 @@ public class QuestRewardItem
 }
 
 [XmlType]
-public class QuestNpc
-{
+public class QuestNpc {
     [XmlElement(Order = 1)]
     public bool Enable;
     [XmlElement(Order = 2)]
@@ -107,8 +100,7 @@ public class QuestNpc
 }
 
 [XmlType]
-public class QuestDungeon
-{
+public class QuestDungeon {
     [XmlElement(Order = 1)]
     public byte State;
     [XmlElement(Order = 2)]
@@ -118,8 +110,7 @@ public class QuestDungeon
 }
 
 [XmlType]
-public class QuestSummonPortal
-{
+public class QuestSummonPortal {
     [XmlElement(Order = 1)]
     public int FieldID;
     [XmlElement(Order = 2)]
@@ -127,8 +118,7 @@ public class QuestSummonPortal
 }
 
 [XmlType]
-public class QuestCondition
-{
+public class QuestCondition {
     [XmlElement(Order = 1)]
     public string Type;
     [XmlElement(Order = 2)]
@@ -140,8 +130,7 @@ public class QuestCondition
 
     public QuestCondition() { }
 
-    public QuestCondition(string type, string code, int goal, string target)
-    {
+    public QuestCondition(string type, string code, int goal, string target) {
         Type = type;
         Code = code;
         Goal = goal;
@@ -150,8 +139,7 @@ public class QuestCondition
 }
 
 [XmlType]
-public class QuestDispatch
-{
+public class QuestDispatch {
     [XmlElement(Order = 1)]
     public string Type;
     [XmlElement(Order = 2)]

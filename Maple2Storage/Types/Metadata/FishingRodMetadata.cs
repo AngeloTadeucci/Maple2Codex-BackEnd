@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class FishingRodMetadata
-{
+public class FishingRodMetadata {
     [XmlElement(Order = 1)]
     public int RodId;
     [XmlElement(Order = 2)]

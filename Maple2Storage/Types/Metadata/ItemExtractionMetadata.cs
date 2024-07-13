@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemExtractionMetadata
-{
+public class ItemExtractionMetadata {
     [XmlElement(Order = 1)]
     public int SourceItemId;
     [XmlElement(Order = 2)]
@@ -14,8 +13,7 @@ public class ItemExtractionMetadata
     [XmlElement(Order = 4)]
     public int ResultItemId;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"ItemExtractionMetadata(SourceItemId:{SourceItemId}, TryCount:{TryCount}, ScrollCount:{ScrollCount}, ResultItemId:{ResultItemId})";
     }
 }
