@@ -23,15 +23,17 @@ if (!DatabaseExists()) {
     ("items", ItemParser.Parse),
     ("item_boxes", ItemDropParser.Parse),
     ("npcs", NpcParser.Parse),
-     ("maps", MapNameParser.Parse),
-      ("achieves", AchieveParser.Parse),
-       ("additional_effect", AdditionalEffectParser.Parse)
-       ];
+    ("maps", MapNameParser.Parse),
+    ("achieves", AchieveParser.Parse),
+    ("additional_effects", AdditionalEffectParser.Parse)
+];
 
 foreach ((string, Action) table in tables) {
     if (!TableExists(table.Item1)) {
         Console.WriteLine($"{table.Item1} table does not exist. Creating...");
         DropAndCreateTable(table.Item1);
+        table.Item2();
+        continue;
     }
 
     Console.WriteLine($"Drop and create {table.Item1}? (y/n)");
@@ -41,9 +43,6 @@ foreach ((string, Action) table in tables) {
     DropAndCreateTable(table.Item1);
     table.Item2();
 }
-
-Console.WriteLine("Parsing AdditionalEffects...");
-AdditionalEffectParser.Parse();
 
 Console.WriteLine("Finished!");
 
