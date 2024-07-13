@@ -18,8 +18,8 @@ public static class QueryManager {
         }
     }
 
-    private static MySqlConnection Connection() {
         return new("SERVER=localhost;PORT=3310;USER=root;PASSWORD=password;DATABASE=maple2_codex;");
+    public static MySqlConnection Connection() {
     }
 
     public static MySqlConnection ConnectionNoDb() {
