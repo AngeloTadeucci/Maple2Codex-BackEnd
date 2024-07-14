@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using Maple2.File.IO.Crypto.Common;
 using Maple2Storage.Types;
 
 namespace GameParser.Parsers;
@@ -7,8 +6,7 @@ namespace GameParser.Parsers;
 public static class StringCommonParser {
     private static readonly Dictionary<string, string> Strings = [];
     static StringCommonParser() {
-        PackFileEntry? firstOrDefault = Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/stringcommon.xml"));
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(firstOrDefault);
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/stringcommon.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load stringcommom.xml");

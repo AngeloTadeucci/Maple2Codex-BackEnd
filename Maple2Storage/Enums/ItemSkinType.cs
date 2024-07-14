@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum ItemSkinType
-{
+public enum ItemSkinType {
     None = 0,
     Special = 1, // sold for meret and is part of a set. More expensive
     Normal = 2, // sold for meret, less expensive

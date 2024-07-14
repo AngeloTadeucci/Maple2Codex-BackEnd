@@ -7,7 +7,7 @@ public static class AnimationParser {
     public static readonly Dictionary<string, List<string>> Animations = [];
 
     static AnimationParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("anikeytext.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("anikeytext.xml")));
         if (xmlFile is null) {
             throw new("Failed to load anikeytext.xml");
         }

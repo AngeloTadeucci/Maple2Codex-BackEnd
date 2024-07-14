@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class RecipeMetadata
-{
+public class RecipeMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -36,8 +35,7 @@ public class RecipeMetadata
 }
 
 [XmlType]
-public class RecipeItem
-{
+public class RecipeItem {
     [XmlElement(Order = 1)]
     public int ItemId;
     [XmlElement(Order = 2)]

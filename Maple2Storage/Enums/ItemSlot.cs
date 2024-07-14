@@ -3,8 +3,7 @@
 // NOTE: These enum are case sensitive
 namespace Maple2Storage.Enums;
 
-public enum ItemSlot : byte
-{
+public enum ItemSlot : byte {
     [Description("None")]
     NONE = 0,
     [Description("Hair")]

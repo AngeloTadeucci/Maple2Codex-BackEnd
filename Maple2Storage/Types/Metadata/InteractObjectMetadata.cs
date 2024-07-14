@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class InteractObjectMetadata
-{
+public class InteractObjectMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -23,8 +22,7 @@ public class InteractObjectMetadata
 }
 
 [XmlType]
-public class InteractObjectRewardMetadata
-{
+public class InteractObjectRewardMetadata {
     [XmlElement(Order = 1)]
     public int Exp;
     [XmlElement(Order = 2)]
@@ -38,8 +36,7 @@ public class InteractObjectRewardMetadata
 }
 
 [XmlType]
-public class InteractObjectDropMetadata
-{
+public class InteractObjectDropMetadata {
     [XmlElement(Order = 1)]
     public string ObjectLevel;
     [XmlElement(Order = 2)]
@@ -51,15 +48,13 @@ public class InteractObjectDropMetadata
 }
 
 [XmlType]
-public class InteractObjectGatheringMetadata
-{
+public class InteractObjectGatheringMetadata {
     [XmlElement(Order = 1)]
     public int RecipeId;
 }
 
 [XmlType]
-public class InteractObjectWebMetadata
-{
+public class InteractObjectWebMetadata {
     [XmlElement(Order = 1)]
     public string Url;
 }

@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class DungeonMetadata
-{
+public class DungeonMetadata {
     [XmlElement(Order = 1)]
     public int DungeonRoomId;
     [XmlElement(Order = 2)]

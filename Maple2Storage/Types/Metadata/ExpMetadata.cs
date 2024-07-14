@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ExpMetadata
-{
+public class ExpMetadata {
     [XmlElement(Order = 1)]
     public short Level;
     [XmlElement(Order = 2)]

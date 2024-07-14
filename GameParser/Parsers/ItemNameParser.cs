@@ -8,9 +8,9 @@ public static class ItemNameParser {
     public static readonly Dictionary<int, string> ItemNamesPlural = [];
 
     static ItemNameParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/itemname.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/itemname.xml")));
         XmlDocument? xmlFilePlural =
-            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/itemnameplural.xml")));
+            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/itemnameplural.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load itemname.xml");

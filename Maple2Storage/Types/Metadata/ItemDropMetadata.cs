@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemDropMetadata
-{
+public class ItemDropMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -12,8 +11,7 @@ public class ItemDropMetadata
 }
 
 [XmlType]
-public class DropGroup
-{
+public class DropGroup {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -21,8 +19,7 @@ public class DropGroup
 }
 
 [XmlType]
-public class DropGroupContent
-{
+public class DropGroupContent {
     [XmlElement(Order = 1)]
     public List<int> ItemIds = new();
     [XmlElement(Order = 2)]

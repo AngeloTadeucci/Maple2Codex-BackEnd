@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class MasteryUgcHousingMetadata
-{
+public class MasteryUgcHousingMetadata {
     [XmlElement(Order = 1)]
     public byte Grade;
     [XmlElement(Order = 2)]

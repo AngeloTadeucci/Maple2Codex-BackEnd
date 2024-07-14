@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class MeretMarketCategoryMetadata
-{
+public class MeretMarketCategoryMetadata {
     [XmlElement(Order = 1)]
     public MeretMarketSection Section;
     [XmlElement(Order = 2)]
@@ -13,8 +12,7 @@ public class MeretMarketCategoryMetadata
 }
 
 [XmlType]
-public class MeretMarketTab
-{
+public class MeretMarketTab {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]

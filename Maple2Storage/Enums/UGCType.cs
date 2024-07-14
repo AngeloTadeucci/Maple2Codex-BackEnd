@@ -1,8 +1,7 @@
 ﻿namespace Maple2Storage.Enums;
 
 // All valid UGC types
-public enum UGCType : byte
-{
+public enum UGCType : byte {
     None = 0x00,
     Item = 0x01,
     Furniture = 0x02,

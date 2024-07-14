@@ -1,7 +1,6 @@
 ﻿namespace MaplePacketLib2.Tools;
 
-public interface IPacketReader : IDisposable
-{
+public interface IPacketReader : IDisposable {
     public int Available { get; }
 
     public T Read<T>() where T : struct;

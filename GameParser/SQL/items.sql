@@ -49,6 +49,7 @@ CREATE TABLE maple2_codex.items
     box_id              int              not null default 0,
     item_type           int              not null default 0,
     represent_option    int              not null default 0,
+    additional_effects  text             not null,
     CONSTRAINT items_pk PRIMARY KEY (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4

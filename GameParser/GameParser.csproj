@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="DotNetZip" Version="1.16.0" />
-      <PackageReference Include="Maple2.File.Parser" Version="2.0.9" />
+      <PackageReference Include="Maple2.File.Parser.Tadeucci" Version="2.1.22" />
       <PackageReference Include="MoonSharp" Version="2.0.0" />
       <PackageReference Include="MySql.Data" Version="8.0.30" />
       <PackageReference Include="SqlKata" Version="2.3.7" />

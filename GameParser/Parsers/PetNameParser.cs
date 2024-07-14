@@ -7,7 +7,7 @@ public static class PetNameParser {
     public static readonly Dictionary<int, string> PetNames = [];
 
     static PetNameParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/petname.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/petname.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load petname.xml");

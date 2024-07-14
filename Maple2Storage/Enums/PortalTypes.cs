@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum PortalTypes : byte
-{
+public enum PortalTypes : byte {
     Field = 0x00,
     DungeonReturnToLobby = 0x01,
     DungeonEnter = 0x09,

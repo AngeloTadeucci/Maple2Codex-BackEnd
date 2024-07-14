@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public record MountMetadata
-{
+public record MountMetadata {
     [XmlElement(Order = 1)]
     public int Id { get; init; }
 

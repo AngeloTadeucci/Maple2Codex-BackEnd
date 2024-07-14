@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class HomeTemplateMetadata
-{
+public class HomeTemplateMetadata {
     [XmlElement(Order = 1)]
     public string Id;
     [XmlElement(Order = 2)]
@@ -16,8 +15,7 @@ public class HomeTemplateMetadata
 }
 
 [XmlType]
-public class CubeTemplate
-{
+public class CubeTemplate {
     [XmlElement(Order = 1)]
     public int ItemId;
     [XmlElement(Order = 2)]
@@ -27,8 +25,7 @@ public class CubeTemplate
 
     public CubeTemplate() { }
 
-    public CubeTemplate(int itemId, CoordF coordF, CoordF rotation)
-    {
+    public CubeTemplate(int itemId, CoordF coordF, CoordF rotation) {
         ItemId = itemId;
         CoordF = coordF;
         Rotation = rotation;

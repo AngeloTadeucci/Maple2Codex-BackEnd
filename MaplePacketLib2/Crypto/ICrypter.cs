@@ -1,7 +1,6 @@
 ﻿namespace MaplePacketLib2.Crypto;
 
-public interface ICrypter
-{
+public interface ICrypter {
     void Encrypt(byte[] src);
     void Encrypt(byte[] src, int start, int end);
     void Decrypt(byte[] src);

@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum ItemStringTag
-{
+public enum ItemStringTag {
     None = 0,
     LulluKey = 26,
     LulluBox = 27, // Mystery Box

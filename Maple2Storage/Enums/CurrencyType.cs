@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum CurrencyType : byte
-{
+public enum CurrencyType : byte {
     Meso,
     ValorToken = 3,
     Treva = 4,
@@ -17,8 +16,7 @@ public enum CurrencyType : byte
     BankMesos
 }
 
-public enum GameEventCurrencyType : byte
-{
+public enum GameEventCurrencyType : byte {
     None = 0,
     Meso = 1,
     Meret = 2

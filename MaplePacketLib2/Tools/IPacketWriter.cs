@@ -1,7 +1,6 @@
 ﻿namespace MaplePacketLib2.Tools;
 
-public interface IPacketWriter : IDisposable
-{
+public interface IPacketWriter : IDisposable {
     public void Write<T>(in T value) where T : struct;
     public void WriteBytes(byte[] value);
     public void WriteBytes(byte[] value, int offset, int length);

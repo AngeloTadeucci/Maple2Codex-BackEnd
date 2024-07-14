@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GameParser.Tools;
 using Maple2.File.Parser.Tools;
 using Maple2.File.Parser.Xml.Npc;
 using Maple2Storage.Types;
@@ -29,9 +30,7 @@ public static class NpcParser {
     };
 
     public static void Parse() {
-        JsonSerializerOptions options = new() {
-            IncludeFields = true,
-        };
+
 
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.NpcParser parser = new(Paths.XmlReader);
@@ -75,10 +74,10 @@ public static class NpcParser {
                 animations = JsonSerializer.Serialize(animations),
                 race = race ?? "",
                 class_name = ClassName.ElementAtOrDefault(data.basic.@class) ?? "",
-                field_metadata = JsonSerializer.Serialize(fieldMetadata, options),
+                field_metadata = JsonSerializer.Serialize(fieldMetadata, SerializeOptions.Options),
                 title,
                 shop_id = data.basic.shopId,
-                skills = JsonSerializer.Serialize(data.skill, options),
+                skills = JsonSerializer.Serialize(data.skill, SerializeOptions.Options),
             });
         }
     }

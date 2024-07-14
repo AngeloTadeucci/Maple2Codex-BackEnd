@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class InstrumentCategoryInfoMetadata
-{
+public class InstrumentCategoryInfoMetadata {
     [XmlElement(Order = 1)]
     public byte CategoryId;
     [XmlElement(Order = 2)]
@@ -14,8 +13,7 @@ public class InstrumentCategoryInfoMetadata
     [XmlElement(Order = 4)]
     public byte PercussionId;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"InstrumentCategoryInfo(CategoryId:{CategoryId},GMId:{GMId},Octave:{Octave},PercussionId{PercussionId})";
     }
 }

@@ -1,8 +1,7 @@
 ﻿namespace Maple2Storage.Enums;
 
 [Flags]
-public enum ItemTransferFlag : byte
-{
+public enum ItemTransferFlag : byte {
     Untradeable = 0,
     Unknown1 = 1,
     Splitable = 2,

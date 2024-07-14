@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum NpcAction : byte
-{
+public enum NpcAction : byte {
     None = 0,
     Idle = 1,
     Walk = 2,

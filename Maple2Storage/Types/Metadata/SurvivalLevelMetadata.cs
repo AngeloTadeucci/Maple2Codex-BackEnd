@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class SurvivalLevelMetadata
-{
+public class SurvivalLevelMetadata {
     [XmlElement(Order = 1)]
     public int Level;
     [XmlElement(Order = 2)]

@@ -5,8 +5,7 @@ using ProtoBuf;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class MapEntityMetadata
-{
+public class MapEntityMetadata {
     [XmlElement(Order = 1)]
     public readonly List<MapNpc> Npcs = new();
     [XmlElement(Order = 2)]
@@ -68,8 +67,7 @@ public class MapEntityMetadata
 }
 
 [XmlType]
-public class MapWeaponObject
-{
+public class MapWeaponObject {
     [XmlElement(Order = 1)]
     public readonly CoordB Coord;
     [XmlElement(Order = 2)]
@@ -77,21 +75,18 @@ public class MapWeaponObject
 
     public MapWeaponObject() { }
 
-    public MapWeaponObject(CoordB coord, List<int> weaponIds)
-    {
+    public MapWeaponObject(CoordB coord, List<int> weaponIds) {
         Coord = coord;
         WeaponItemIds = weaponIds;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"MapObject(Coord:{Coord},WeaponId:{WeaponItemIds})";
     }
 }
 
 [XmlType]
-public class MapNpc
-{
+public class MapNpc {
     [XmlElement(Order = 1)]
     public readonly int Id;
     [XmlElement(Order = 2)]
@@ -114,8 +109,7 @@ public class MapNpc
     public MapNpc() { }
 
     public MapNpc(int id, string modelName, string instanceName, CoordS coord, CoordS rotation, bool isSpawnOnFieldCreate, bool isDayDie, bool isNightDie,
-        string patrolDataUuid)
-    {
+        string patrolDataUuid) {
         Id = id;
         ModelName = modelName;
         InstanceName = instanceName;
@@ -127,8 +121,7 @@ public class MapNpc
         PatrolDataUuid = patrolDataUuid;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"MapNpc(Id:{Id},ModelName:{ModelName},Rotation:{Rotation},Coord:{Coord})";
     }
 
@@ -136,8 +129,7 @@ public class MapNpc
 }
 
 [XmlType]
-public class MapPortal
-{
+public class MapPortal {
     [XmlElement(Order = 1)]
     public readonly int Id;
     [XmlElement(Order = 2)]
@@ -164,8 +156,7 @@ public class MapPortal
     public MapPortal() { }
 
     public MapPortal(int id, string name, bool enable, bool isVisible, bool minimapVisible, int target, CoordS coord, CoordS rotation, int targetPortalId,
-        PortalTypes portalType, int triggerId = 0)
-    {
+        PortalTypes portalType, int triggerId = 0) {
         Id = id;
         Name = name;
         Enable = enable;
@@ -179,16 +170,14 @@ public class MapPortal
         TriggerId = triggerId;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"MapPortal(Id:{Id},String:{Name},Enable:{Enable},IsVisible:{IsVisible},MinimapVisible:{MinimapVisible}," +
                $"Target:{Target},Rotation:{Rotation},Coord:{Coord},TargetPortalId:{TargetPortalId}, PortalType:{PortalType},TriggerId:{TriggerId})";
     }
 }
 
 [XmlType]
-public class MapPlayerSpawn
-{
+public class MapPlayerSpawn {
     [XmlElement(Order = 1)]
     public readonly CoordS Coord;
     [XmlElement(Order = 2)]
@@ -196,21 +185,18 @@ public class MapPlayerSpawn
 
     public MapPlayerSpawn() { }
 
-    public MapPlayerSpawn(CoordS coord, CoordS rotation)
-    {
+    public MapPlayerSpawn(CoordS coord, CoordS rotation) {
         Coord = coord;
         Rotation = rotation;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"MapPlayerSpawn(Coord:{Coord},Rotation:{Rotation})";
     }
 }
 
 [XmlType]
-public class MapMobSpawn
-{
+public class MapMobSpawn {
     [XmlElement(Order = 1)]
     public readonly int Id;
     [XmlElement(Order = 2)]
@@ -226,8 +212,7 @@ public class MapMobSpawn
 
     public MapMobSpawn() { }
 
-    public MapMobSpawn(int id, CoordS coord, int npcCount, List<int> npcList, int spawnRadius, SpawnMetadata spawnMetadata = null)
-    {
+    public MapMobSpawn(int id, CoordS coord, int npcCount, List<int> npcList, int spawnRadius, SpawnMetadata spawnMetadata = null) {
         Id = id;
         Coord = coord;
         NpcCount = npcCount;
@@ -236,15 +221,13 @@ public class MapMobSpawn
         SpawnData = spawnMetadata;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"MapMobSpawn(Id:{Id},Coord:{Coord},NpcCount:{NpcCount},NpcList{NpcList},SpawnRadius:{SpawnRadius})";
     }
 }
 
 [XmlType]
-public class SpawnMetadata
-{
+public class SpawnMetadata {
     [XmlElement(Order = 1)]
     public readonly int Difficulty;
     [XmlElement(Order = 2)]
@@ -260,8 +243,7 @@ public class SpawnMetadata
 
     public SpawnMetadata() { }
 
-    public SpawnMetadata(string[] tags, int population, int spawnTime, int difficulty, int minDifficulty = 1, bool isPetSpawn = false)
-    {
+    public SpawnMetadata(string[] tags, int population, int spawnTime, int difficulty, int minDifficulty = 1, bool isPetSpawn = false) {
         Tags = tags;
         Population = population;
         SpawnTime = spawnTime;
@@ -272,8 +254,7 @@ public class SpawnMetadata
 }
 
 [XmlType]
-public class PatrolData
-{
+public class PatrolData {
     [XmlElement(Order = 1)]
     public string Uuid;
     [XmlElement(Order = 2)]
@@ -289,8 +270,7 @@ public class PatrolData
 
     public PatrolData() { }
 
-    public PatrolData(string uuid, string name, bool isAirWayPoint, int patrolSpeed, bool isLoop, List<WayPoint> wayPoints)
-    {
+    public PatrolData(string uuid, string name, bool isAirWayPoint, int patrolSpeed, bool isLoop, List<WayPoint> wayPoints) {
         Uuid = uuid;
         Name = name;
         IsAirWayPoint = isAirWayPoint;
@@ -299,15 +279,13 @@ public class PatrolData
         WayPoints = wayPoints;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"PatrolData(Name:{Name},PatrolSpeed:{PatrolSpeed},IsLoop:{IsLoop},IsAirWayPoint:{IsAirWayPoint})";
     }
 }
 
 [XmlType]
-public class WayPoint
-{
+public class WayPoint {
     [XmlElement(Order = 1)]
     public string Id;
     [XmlElement(Order = 2)]
@@ -325,8 +303,7 @@ public class WayPoint
 
     public WayPoint() { }
 
-    public WayPoint(string id, bool isVisible, CoordS position, CoordS rotation, string approachAnimation, string arriveAnimation, int arriveAnimationTime)
-    {
+    public WayPoint(string id, bool isVisible, CoordS position, CoordS rotation, string approachAnimation, string arriveAnimation, int arriveAnimationTime) {
         Id = id;
         IsVisible = isVisible;
         Position = position;
@@ -336,16 +313,14 @@ public class WayPoint
         ArriveAnimationTime = arriveAnimationTime;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"PatrolData(Id:{Id},IsVisible:{IsVisible},Position:{Position},Rotation:{Rotation})";
     }
 }
 
 [XmlType]
 [ProtoContract]
-public class MapEventNpcSpawnPoint
-{
+public class MapEventNpcSpawnPoint {
     [ProtoMember(1)]
     [XmlElement(Order = 1)]
     public int Id;
@@ -370,8 +345,7 @@ public class MapEventNpcSpawnPoint
 
     public MapEventNpcSpawnPoint() { }
 
-    public MapEventNpcSpawnPoint(int id, uint count, IEnumerable<string> npcIds, string spawnAnimation, float spawnRadius, CoordF position, CoordF rotation)
-    {
+    public MapEventNpcSpawnPoint(int id, uint count, IEnumerable<string> npcIds, string spawnAnimation, float spawnRadius, CoordF position, CoordF rotation) {
         Id = id;
         Count = count;
         NpcIds = new(npcIds);
@@ -393,27 +367,23 @@ public class MapEventNpcSpawnPoint
 [ProtoInclude(57, typeof(MapTriggerSound))]
 [ProtoInclude(58, typeof(MapTriggerRope))]
 [ProtoInclude(59, typeof(MapTriggerSkill))]
-public class MapTriggerObject
-{
+public class MapTriggerObject {
     [ProtoMember(8)]
     public int Id;
 
     public MapTriggerObject() { }
 
-    public MapTriggerObject(int id)
-    {
+    public MapTriggerObject(int id) {
         Id = id;
     }
 }
 
 [ProtoContract]
-public class MapTriggerMesh : MapTriggerObject
-{
+public class MapTriggerMesh : MapTriggerObject {
     [ProtoMember(9)]
     public bool IsVisible;
 
-    public MapTriggerMesh(int id, bool isVisible) : base(id)
-    {
+    public MapTriggerMesh(int id, bool isVisible) : base(id) {
         IsVisible = isVisible;
     }
 
@@ -421,13 +391,11 @@ public class MapTriggerMesh : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerEffect : MapTriggerObject
-{
+public class MapTriggerEffect : MapTriggerObject {
     [ProtoMember(10)]
     public bool IsVisible;
 
-    public MapTriggerEffect(int id, bool isVisible) : base(id)
-    {
+    public MapTriggerEffect(int id, bool isVisible) : base(id) {
         IsVisible = isVisible;
     }
 
@@ -435,13 +403,11 @@ public class MapTriggerEffect : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerCamera : MapTriggerObject
-{
+public class MapTriggerCamera : MapTriggerObject {
     [ProtoMember(11)]
     public bool IsEnabled;
 
-    public MapTriggerCamera(int id, bool isEnabled) : base(id)
-    {
+    public MapTriggerCamera(int id, bool isEnabled) : base(id) {
         IsEnabled = isEnabled;
     }
 
@@ -449,15 +415,13 @@ public class MapTriggerCamera : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerBox : MapTriggerObject
-{
+public class MapTriggerBox : MapTriggerObject {
     [ProtoMember(12)]
     public CoordF Position;
     [ProtoMember(13)]
     public CoordF Dimension;
 
-    public MapTriggerBox(int id, CoordF position, CoordF dimension) : base(id)
-    {
+    public MapTriggerBox(int id, CoordF position, CoordF dimension) : base(id) {
         Position = position;
         Dimension = dimension;
     }
@@ -466,13 +430,11 @@ public class MapTriggerBox : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerLadder : MapTriggerObject
-{
+public class MapTriggerLadder : MapTriggerObject {
     [ProtoMember(14)]
     public bool IsVisible;
 
-    public MapTriggerLadder(int id, bool isVisible) : base(id)
-    {
+    public MapTriggerLadder(int id, bool isVisible) : base(id) {
         IsVisible = isVisible;
     }
 
@@ -480,15 +442,13 @@ public class MapTriggerLadder : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerActor : MapTriggerObject
-{
+public class MapTriggerActor : MapTriggerObject {
     [ProtoMember(15)]
     public bool IsVisible;
     [ProtoMember(16)]
     public string InitialSequence;
 
-    public MapTriggerActor(int id, bool isVisible, string initialSequence) : base(id)
-    {
+    public MapTriggerActor(int id, bool isVisible, string initialSequence) : base(id) {
         IsVisible = isVisible;
         InitialSequence = initialSequence;
     }
@@ -497,13 +457,11 @@ public class MapTriggerActor : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerCube : MapTriggerObject
-{
+public class MapTriggerCube : MapTriggerObject {
     [ProtoMember(17)]
     public bool IsVisible;
 
-    public MapTriggerCube(int id, bool isVisible) : base(id)
-    {
+    public MapTriggerCube(int id, bool isVisible) : base(id) {
         IsVisible = isVisible;
     }
 
@@ -511,13 +469,11 @@ public class MapTriggerCube : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerSound : MapTriggerObject
-{
+public class MapTriggerSound : MapTriggerObject {
     [ProtoMember(18)]
     public bool IsEnabled;
 
-    public MapTriggerSound(int id, bool enabled) : base(id)
-    {
+    public MapTriggerSound(int id, bool enabled) : base(id) {
         IsEnabled = enabled;
     }
 
@@ -525,13 +481,11 @@ public class MapTriggerSound : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapTriggerRope : MapTriggerObject
-{
+public class MapTriggerRope : MapTriggerObject {
     [ProtoMember(19)]
     public bool IsVisible;
 
-    public MapTriggerRope(int id, bool isVisible) : base(id)
-    {
+    public MapTriggerRope(int id, bool isVisible) : base(id) {
         IsVisible = isVisible;
     }
 
@@ -541,8 +495,7 @@ public class MapTriggerRope : MapTriggerObject
 [ProtoContract]
 [ProtoInclude(20, typeof(MapBreakableNifObject))]
 [ProtoInclude(21, typeof(MapBreakableActorObject))]
-public class MapBreakableObject
-{
+public class MapBreakableObject {
     [ProtoMember(22)]
     public string EntityId;
     [ProtoMember(23)]
@@ -554,8 +507,7 @@ public class MapBreakableObject
 
     public MapBreakableObject() { }
 
-    public MapBreakableObject(string entityId, bool isEnabled, int hideDuration, int resetDuration)
-    {
+    public MapBreakableObject(string entityId, bool isEnabled, int hideDuration, int resetDuration) {
         EntityId = entityId;
         IsEnabled = isEnabled;
         HideDuration = hideDuration;
@@ -564,23 +516,20 @@ public class MapBreakableObject
 }
 
 [ProtoContract]
-public class MapBreakableNifObject : MapBreakableObject
-{
+public class MapBreakableNifObject : MapBreakableObject {
     [ProtoMember(26)]
     public int TriggerId;
 
     public MapBreakableNifObject() { }
 
     public MapBreakableNifObject(string id, bool isEnabled, int triggerId, int hideDuration, int resetDuration) : base(id, isEnabled, hideDuration,
-        resetDuration)
-    {
+        resetDuration) {
         TriggerId = triggerId;
     }
 }
 
 [ProtoContract]
-public class MapTriggerSkill : MapTriggerObject
-{
+public class MapTriggerSkill : MapTriggerObject {
     [ProtoMember(27)]
     public CoordF Position;
     [ProtoMember(28)]
@@ -590,8 +539,7 @@ public class MapTriggerSkill : MapTriggerObject
     [ProtoMember(30)]
     public int SkillId;
 
-    public MapTriggerSkill(int id, int skillId, short skillLevel, byte count, CoordF position) : base(id)
-    {
+    public MapTriggerSkill(int id, int skillId, short skillLevel, byte count, CoordF position) : base(id) {
         Position = position;
         Count = count;
         SkillLevel = skillLevel;
@@ -602,16 +550,14 @@ public class MapTriggerSkill : MapTriggerObject
 }
 
 [ProtoContract]
-public class MapBreakableActorObject : MapBreakableObject
-{
+public class MapBreakableActorObject : MapBreakableObject {
     public MapBreakableActorObject() { }
 
     public MapBreakableActorObject(string id, bool isEnabled, int hideDuration, int resetDuration) : base(id, isEnabled, hideDuration, resetDuration) { }
 }
 
 [XmlType]
-public class MapVibrateObject
-{
+public class MapVibrateObject {
     [XmlElement(Order = 1)]
     public string EntityId;
     [XmlElement(Order = 2)]
@@ -619,16 +565,14 @@ public class MapVibrateObject
 
     public MapVibrateObject() { }
 
-    public MapVibrateObject(string id, CoordF position)
-    {
+    public MapVibrateObject(string id, CoordF position) {
         EntityId = id;
         Position = position;
     }
 }
 
 [XmlType]
-public class MapInteractObject
-{
+public class MapInteractObject {
     [XmlElement(Order = 1)]
     public string EntityId;
     [XmlElement(Order = 2)]
@@ -644,8 +588,7 @@ public class MapInteractObject
 
     public MapInteractObject() { }
 
-    public MapInteractObject(string entityId, int interactId, bool isEnabled, InteractObjectType type, CoordF position, CoordF rotation)
-    {
+    public MapInteractObject(string entityId, int interactId, bool isEnabled, InteractObjectType type, CoordF position, CoordF rotation) {
         EntityId = entityId;
         InteractId = interactId;
         IsEnabled = isEnabled;
@@ -656,8 +599,7 @@ public class MapInteractObject
 }
 
 [XmlType]
-public class MapLiftableObject
-{
+public class MapLiftableObject {
     [XmlElement(Order = 1)]
     public string EntityId;
     [XmlElement(Order = 2)]
@@ -686,8 +628,7 @@ public class MapLiftableObject
     public MapLiftableObject() { }
 
     public MapLiftableObject(string entityId, int itemId, int itemStackCount, string maskQuestId, string maskQuestState, string effectQuestId, string effectQuestState,
-        int itemLifeTime, int regenCheckTime, int liftableFinishTime, CoordF position, CoordF rotation)
-    {
+        int itemLifeTime, int regenCheckTime, int liftableFinishTime, CoordF position, CoordF rotation) {
         EntityId = entityId;
         ItemId = itemId;
         ItemStackCount = itemStackCount;
@@ -704,8 +645,7 @@ public class MapLiftableObject
 }
 
 [XmlType]
-public class MapLiftableTarget
-{
+public class MapLiftableTarget {
     [XmlElement(Order = 1)]
     public int Target;
     [XmlElement(Order = 2)]
@@ -715,8 +655,7 @@ public class MapLiftableTarget
 
     public MapLiftableTarget() { }
 
-    public MapLiftableTarget(int target, CoordF position, CoordF shapeDimensions)
-    {
+    public MapLiftableTarget(int target, CoordF position, CoordF shapeDimensions) {
         Target = target;
         Position = position;
         ShapeDimensions = shapeDimensions;
@@ -724,8 +663,7 @@ public class MapLiftableTarget
 }
 
 [XmlType]
-public class MapChestMetadata
-{
+public class MapChestMetadata {
     [XmlElement(Order = 1)]
     public CoordF Position;
     [XmlElement(Order = 2)]

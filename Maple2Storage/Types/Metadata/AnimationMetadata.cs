@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class AnimationMetadata
-{
+public class AnimationMetadata {
     [XmlElement(Order = 1)]
     public string ActorId;
     [XmlElement(Order = 2)]
@@ -12,8 +11,7 @@ public class AnimationMetadata
 }
 
 [XmlType]
-public class SequenceMetadata
-{
+public class SequenceMetadata {
     [XmlElement(Order = 1)]
     public short SequenceId;
     [XmlElement(Order = 2)]
@@ -23,8 +21,7 @@ public class SequenceMetadata
 }
 
 [XmlType]
-public class KeyMetadata
-{
+public class KeyMetadata {
     [XmlElement(Order = 1)]
     public string KeyName;
     [XmlElement(Order = 2)]

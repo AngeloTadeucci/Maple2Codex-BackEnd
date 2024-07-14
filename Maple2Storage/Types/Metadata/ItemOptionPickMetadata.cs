@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemOptionPickMetadata
-{
+public class ItemOptionPickMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -13,8 +12,7 @@ public class ItemOptionPickMetadata
 }
 
 [XmlType]
-public class ItemOptionPick
-{
+public class ItemOptionPick {
     [XmlElement(Order = 1)]
     public byte Rarity;
     [XmlElement(Order = 2)]
@@ -26,8 +24,7 @@ public class ItemOptionPick
 }
 
 [XmlType]
-public class ConstantPick
-{
+public class ConstantPick {
     [XmlElement(Order = 1)]
     public StatAttribute Stat;
     [XmlElement(Order = 2)]
@@ -35,8 +32,7 @@ public class ConstantPick
 }
 
 [XmlType]
-public class StaticPick
-{
+public class StaticPick {
     [XmlElement(Order = 1)]
     public StatAttribute Stat;
     [XmlElement(Order = 2)]

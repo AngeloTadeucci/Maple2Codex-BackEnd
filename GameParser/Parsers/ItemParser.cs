@@ -26,11 +26,6 @@ public static class ItemParser {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.ItemParser parser = new(Paths.XmlReader);
 
-        Dictionary<int, string> itemNames = [];
-        foreach ((int id, string? name, ItemData _) in parser.Parse()) {
-            itemNames[id] = name;
-        }
-
         foreach ((int id, string? name, ItemData? data) in parser.Parse()) {
             Console.WriteLine($"Parsing item {id} - {name}");
             Limit? limit = data.limit;
@@ -70,20 +65,20 @@ public static class ItemParser {
 
             Item item = new(id, rarity, jobLimit, GetItemType(id), limit.levelLimit, data.option.constant,
                 data.option.@static, data.option.optionID, (int) data.option.optionLevelFactor, data.option.random, itemSlot, property.gearScore);
+
             StatsParser.ParseStats(item,
                 out List<(Stat stat, string description)> constantStats,
                 out List<(StatRange stat, string description)> staticStats,
                 out List<(StatRange stat, string description)> randomStats,
                 out int randomStatCount);
 
-            JsonSerializerOptions options = new() {
-                IncludeFields = true,
-            };
+
+
             SetItemInfoMetadata? setInfo = SetItemInfoParser.GetMetadata(id);
             List<(string itemNames, int id)> setData = [];
             if (setInfo is not null) {
                 foreach (int itemId in setInfo.ItemIds) {
-                    setData.Add((itemNames[itemId], itemId));
+                    setData.Add((ItemNameParser.ItemNames.TryGetValue(itemId, out string? itemName) ? itemName : "", itemId));
                 }
             }
 
@@ -110,6 +105,8 @@ public static class ItemParser {
                         break;
                     }
             }
+
+            List<(int id, short level)> additionalEffects = additionalEffect.id.Zip(additionalEffect.level, (id, level) => (id, level)).ToList();
 
             QueryManager.QueryFactory.Query("items").Insert(new {
                 id,
@@ -139,7 +136,7 @@ public static class ItemParser {
                 stack_limit = property.slotMax,
                 tradeable_count = property.tradableCount,
                 repackage_limit = property.rePackingLimitCount,
-                repackage_scrolls = string.Join(",", property.globalRePackingScrollID ?? Array.Empty<int>()),
+                repackage_scrolls = string.Join(",", property.globalRePackingScrollID ?? []),
                 repackage_count = property.globalRePackingItemConsumeCount ?? 0,
                 sell_price = JsonSerializer.Serialize(property.sell.price.ToList()),
                 kfms = JsonSerializer.Serialize(kfms),
@@ -148,19 +145,20 @@ public static class ItemParser {
                 remake_disable = property.remakeDisable,
                 enchantable = limit.exceptEnchant,
                 dyeable = customize?.color == 1,
-                constants_stats = JsonSerializer.Serialize(constantStats, options),
-                static_stats = JsonSerializer.Serialize(staticStats, options),
-                random_stats = JsonSerializer.Serialize(randomStats, options),
+                constants_stats = JsonSerializer.Serialize(constantStats, SerializeOptions.Options),
+                static_stats = JsonSerializer.Serialize(staticStats, SerializeOptions.Options),
+                random_stats = JsonSerializer.Serialize(randomStats, SerializeOptions.Options),
                 random_stat_count = randomStatCount,
                 gear_score = GetGearScore(item),
                 slot = itemSlot,
-                set_info = JsonSerializer.Serialize(setData, options),
+                set_info = JsonSerializer.Serialize(setData, SerializeOptions.Options),
                 set_name = setName,
                 item_preset = preset,
                 glamour_count = ItemExtractionParser.GetMetadata(id)?.TryCount ?? 0,
                 box_id = boxId,
                 item_type = property.type,
                 represent_option = property.representOption,
+                additional_effects = JsonSerializer.Serialize(additionalEffects, SerializeOptions.Options),
             });
         }
     }
@@ -194,45 +192,12 @@ public static class ItemParser {
     }
 
     public static ItemType GetItemType(int id) {
-        //TODO: Find a better method to find the item type
-        return (id / 100000) switch {
-            112 => ItemType.Earring,
-            113 => ItemType.Hat,
-            114 => ItemType.Clothes,
-            115 => ItemType.Pants,
-            116 => ItemType.Gloves,
-            117 => ItemType.Shoes,
-            118 => ItemType.Cape,
-            119 => ItemType.Necklace,
-            120 => ItemType.Ring,
-            121 => ItemType.Belt,
-            122 => ItemType.Overall,
-            130 => ItemType.Bludgeon,
-            131 => ItemType.Dagger,
-            132 => ItemType.Longsword,
-            133 => ItemType.Scepter,
-            134 => ItemType.ThrowingStar,
-            140 => ItemType.Spellbook,
-            141 => ItemType.Shield,
-            150 => ItemType.Greatsword,
-            151 => ItemType.Bow,
-            152 => ItemType.Staff,
-            153 => ItemType.Cannon,
-            154 => ItemType.Blade,
-            155 => ItemType.Knuckle,
-            156 => ItemType.Orb,
-            209 => ItemType.Medal,
-            410 or 420 or 430 => ItemType.Lapenshard,
-            501 or 502 or 503 or 504 or 505 => ItemType.Furnishing,
-            600 => ItemType.Pet,
-            900 => ItemType.Currency,
-            _ => ItemType.None
-        };
+        return new ItemType(id);
     }
 
     public static int GetGearScore(Item item) {
         Script? script = ScriptLoader.GetScript("Functions/calcItemValues");
-        DynValue? result = script?.RunFunction("calcItemGearScore", item.GearScoreValue, item.Rarity, (int) item.Type, 0, 0);
+        DynValue? result = script?.RunFunction("calcItemGearScore", item.GearScoreValue, item.Rarity, (int) item.Type.Type, 0, 0);
 
         if (result is null) {
             return 0;
@@ -244,7 +209,7 @@ public static class ItemParser {
     private static Dictionary<int, (string tooltip, string guide, string main)> ParseItemDescriptions() {
         Dictionary<int, (string tooltip, string guide, string main)> descriptions = [];
         XmlDocument? xmlFile =
-            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/koritemdescription.xml")));
+            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/koritemdescription.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load koritemdescription.xml");
@@ -275,22 +240,36 @@ public static class ItemParser {
 
     private static Dictionary<int, int> ParseItemRarities() {
         Dictionary<int, int> rarities = [];
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
-            if (!entry.Name.StartsWith("table/na/itemwebfinder")) {
-                continue;
-            }
+        PackFileEntry file = Paths.XmlReader.Files.First(x => x.Name.StartsWith("table/na/itemwebfinder", StringComparison.CurrentCultureIgnoreCase));
 
-            XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(entry);
-            XmlNodeList? nodes = innerDocument.SelectNodes("/ms2/key");
-            if (nodes is null) {
-                continue;
-            }
-            foreach (XmlNode node in nodes) {
-                int itemId = int.Parse(node.Attributes!["id"]!.Value);
-                int rarity = int.Parse(node.Attributes["grade"]!.Value);
-                rarities[itemId] = rarity;
-            }
+        XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(file);
+        if (innerDocument is null) {
+            throw new("Failed to load itemwebfinder.xml");
         }
+        XmlNodeList? nodes = innerDocument.SelectNodes("/ms2/key");
+        if (nodes is null) {
+            throw new("Failed to load itemwebfinder.xml");
+        }
+
+        foreach (XmlNode node in nodes) {
+            int itemId = int.Parse(node.Attributes?["id"]?.Value ?? "0");
+            int rarity = int.Parse(node.Attributes?["grade"]?.Value ?? "0");
+            rarities[itemId] = rarity;
+        }
+
+        // read KR ItemWebFinder.xml doc
+        innerDocument = new();
+        innerDocument.Load(Paths.ItemWebFinderXml);
+        nodes = innerDocument.SelectNodes("/ms2/key");
+        if (nodes is null) {
+            throw new("Failed to load itemwebfinder.xml");
+        }
+        foreach (XmlNode node in nodes) {
+            int itemId = int.Parse(node.Attributes!["id"]!.Value);
+            int rarity = int.Parse(node.Attributes["grade"]!.Value);
+            rarities[itemId] = rarity;
+        }
+
 
         return rarities;
     }

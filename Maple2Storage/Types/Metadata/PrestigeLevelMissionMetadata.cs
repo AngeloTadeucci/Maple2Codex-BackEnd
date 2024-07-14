@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class PrestigeLevelMissionMetadata
-{
+public class PrestigeLevelMissionMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]

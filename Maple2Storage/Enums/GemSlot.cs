@@ -2,8 +2,7 @@
 
 namespace Maple2Storage.Enums;
 
-public enum GemSlot : byte
-{
+public enum GemSlot : byte {
     [Description("None")]
     NONE = 0,
     [Description("Transparency Badge")]

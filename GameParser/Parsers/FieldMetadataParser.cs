@@ -7,7 +7,7 @@ public static class FieldMetadataParser {
     public static readonly Dictionary<int, List<(string mapName, int mapId)>> FieldMetadata = [];
 
     static FieldMetadataParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("table/na/fieldmetadata.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("table/na/fieldmetadata.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load fieldmetadata.xml");

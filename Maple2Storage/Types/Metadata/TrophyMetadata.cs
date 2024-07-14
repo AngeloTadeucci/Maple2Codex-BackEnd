@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class TrophyMetadata
-{
+public class TrophyMetadata {
     [XmlElement(Order = 1)]
     public int Id;
     [XmlElement(Order = 2)]
@@ -21,15 +20,13 @@ public class TrophyMetadata
     [XmlElement(Order = 7)]
     public string ConditionCodes = "";
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"TrophyMetadata(Id:{Id},Categories:{string.Join(",", Categories)},Grades:{string.Join(",", Grades)}";
     }
 }
 
 [XmlType]
-public class TrophyGradeMetadata
-{
+public class TrophyGradeMetadata {
     [XmlElement(Order = 1)]
     public int Grade;
     [XmlElement(Order = 2)]
@@ -47,8 +44,7 @@ public class TrophyGradeMetadata
     [XmlElement(Order = 8)]
     public int RewardSubJobLevel;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"TrophyGradeMetadata(Grade:{Grade},Condition:{Condition},RewardType:{RewardType},RewardCode:{RewardCode},RewardValue:{RewardValue},RewardSubJobLevel:{RewardSubJobLevel})";
     }
 }

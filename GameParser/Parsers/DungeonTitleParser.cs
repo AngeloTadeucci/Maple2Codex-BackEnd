@@ -8,7 +8,7 @@ public static class DungeonTitleParser {
 
     static DungeonTitleParser() {
         XmlDocument? xmlFile =
-            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/stringfieldenterance.xml")));
+            Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/stringfieldenterance.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load stringfieldenterance.xml");

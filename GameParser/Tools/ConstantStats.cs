@@ -97,7 +97,7 @@ public static class ConstantStats {
             });
 
             float statValue = constantStats[constantPick.Stat].Value;
-            DynValue? result = script?.RunFunction(calcScript, statValue, constantPick.DeviationValue, (int) item.Type,
+            DynValue? result = script?.RunFunction(calcScript, statValue, constantPick.DeviationValue, (int) item.Type.Type,
                 item.RecommendJobs.First(), item.OptionLevelFactor, item.Rarity, item.Level);
             if (result is null) {
                 return;

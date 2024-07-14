@@ -7,7 +7,7 @@ public static class NpcTitleParser {
     public static readonly Dictionary<int, string> NpcTitle = [];
 
     static NpcTitleParser() {
-        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.FirstOrDefault(x => x.Name.StartsWith("string/en/npctitle.xml")));
+        XmlDocument? xmlFile = Paths.XmlReader.GetXmlDocument(Paths.XmlReader.Files.First(x => x.Name.StartsWith("string/en/npctitle.xml")));
 
         if (xmlFile is null) {
             throw new("Failed to load npctitle.xml");

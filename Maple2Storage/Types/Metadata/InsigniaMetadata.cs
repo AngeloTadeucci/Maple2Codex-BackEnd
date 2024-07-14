@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class InsigniaMetadata
-{
+public class InsigniaMetadata {
     [XmlElement(Order = 1)]
     public short InsigniaId;
     [XmlElement(Order = 2)]

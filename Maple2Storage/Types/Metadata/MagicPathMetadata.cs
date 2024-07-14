@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class MagicPathMetadata
-{
+public class MagicPathMetadata {
     [XmlElement(Order = 1)]
     public readonly long Id;
     [XmlElement(Order = 2)]
@@ -12,21 +11,18 @@ public class MagicPathMetadata
 
     public MagicPathMetadata() { }
 
-    public MagicPathMetadata(long id, List<MagicPathMove> magicPathMoves)
-    {
+    public MagicPathMetadata(long id, List<MagicPathMove> magicPathMoves) {
         Id = id;
         MagicPathMoves = magicPathMoves;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"ID:{Id} {string.Join(",", MagicPathMoves)}";
     }
 }
 
 [XmlType]
-public class MagicPathMove
-{
+public class MagicPathMove {
     [XmlElement(Order = 1)]
     public readonly int Rotation;
     [XmlElement(Order = 2)]
@@ -47,8 +43,7 @@ public class MagicPathMove
     public MagicPathMove() { }
 
     public MagicPathMove(int rotation, CoordF fireOffsetPosition, CoordF direction, CoordF controlValue0, CoordF controlValue1, bool ignoreAdjust,
-        bool traceTargetOffsetPosition, float distance)
-    {
+        bool traceTargetOffsetPosition, float distance) {
         Rotation = rotation;
         FireOffsetPosition = fireOffsetPosition;
         Direction = direction;
@@ -59,8 +54,7 @@ public class MagicPathMove
         Distance = distance;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"Rotation:{Rotation}, FireOffsetPos:{FireOffsetPosition}," +
                $"Direction:{Direction}, ControlValue0:{ControlValue0}, ControlValue1:{ControlValue1}, IgnoreAdjust:{IgnoreAdjust}";
     }

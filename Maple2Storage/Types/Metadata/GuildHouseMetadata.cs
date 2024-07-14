@@ -3,8 +3,7 @@
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class GuildHouseMetadata
-{
+public class GuildHouseMetadata {
     [XmlElement(Order = 1)]
     public int FieldId;
     [XmlElement(Order = 2)]
@@ -18,8 +17,7 @@ public class GuildHouseMetadata
     [XmlElement(Order = 6)]
     public int RethemeCost;
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"GuildBuff(FieldId:{FieldId},Level:{Level},Theme:{Theme},RequiredLevel:{RequiredLevel},UpgradeCost:{UpgradeCost},RethemeCost:{RethemeCost}";
     }
 }

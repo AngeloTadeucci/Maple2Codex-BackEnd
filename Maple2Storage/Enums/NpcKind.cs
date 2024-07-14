@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum NpcKind
-{
+public enum NpcKind {
     None = 0,
     Storage = 2,
     RotatingShop = 12,

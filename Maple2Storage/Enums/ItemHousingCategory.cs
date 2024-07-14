@@ -1,7 +1,6 @@
 ﻿namespace Maple2Storage.Enums;
 
-public enum ItemHousingCategory : short
-{
+public enum ItemHousingCategory : short {
     None = 0,
     Bed = 1,
     Table = 2,

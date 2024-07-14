@@ -4,8 +4,7 @@ using Maple2Storage.Enums;
 namespace Maple2Storage.Types.Metadata;
 
 [XmlType]
-public class ItemEnchantTransferMetadata
-{
+public class ItemEnchantTransferMetadata {
     [XmlElement(Order = 1)]
     public int InputRarity;
     [XmlElement(Order = 2)]

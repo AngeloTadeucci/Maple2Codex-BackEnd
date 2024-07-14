@@ -13,10 +13,10 @@ using System.Diagnostics;
 using MaplePacketLib2.Tools;
 
 string solutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
-string modelDir = new(Path.Combine(solutionDir, "Maple2Storage", "Resources", "Model"));
-string texturesDir = new(Path.Combine(solutionDir, "Maple2Storage", "Resources", "Textures", "Textures"));
-string output = new(Path.Combine(solutionDir, "Maple2Storage", "Resources", "GLTF"));
-const string quote = "\"";
+string modelDir = Path.Combine(solutionDir, "Maple2Storage", "Resources", "Model");
+string texturesDir = Path.Combine(solutionDir, "Maple2Storage", "Resources", "Textures", "Textures");
+string output = Path.Combine(solutionDir, "Maple2Storage", "Resources", "GLTF");
+const char quote = '"';
 
 string[] textures = Directory.GetFileSystemEntries(texturesDir, "*.dds", SearchOption.AllDirectories);
 string[] models = Directory.GetFileSystemEntries(modelDir, "*.nif", SearchOption.AllDirectories);
