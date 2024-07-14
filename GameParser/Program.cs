@@ -47,7 +47,7 @@ foreach ((string, Action) table in tables) {
 Console.WriteLine("Finished!");
 
 static void CreateDatabase() {
-    string databaseSql = File.ReadAllText(Path.Combine(Paths.SolutionDir, "GameParser", "SQL", "Database.sql"));
+    string databaseSql = File.ReadAllText(Path.Combine(Paths.SolutionDir, "GameParser", "SQL", "database.sql"));
     string databaseName = Environment.GetEnvironmentVariable("DB_NAME")!;
     MySqlScript script = new(QueryManager.ConnectionNoDb(), databaseSql.Replace("{databaseName}", databaseName));
     script.Execute();
