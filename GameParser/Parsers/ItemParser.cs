@@ -240,22 +240,36 @@ public static class ItemParser {
 
     private static Dictionary<int, int> ParseItemRarities() {
         Dictionary<int, int> rarities = [];
-        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
-            if (!entry.Name.StartsWith("table/na/itemwebfinder")) {
-                continue;
-            }
+        PackFileEntry file = Paths.XmlReader.Files.First(x => x.Name.StartsWith("table/na/itemwebfinder", StringComparison.CurrentCultureIgnoreCase));
 
-            XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(entry);
-            XmlNodeList? nodes = innerDocument.SelectNodes("/ms2/key");
-            if (nodes is null) {
-                continue;
-            }
-            foreach (XmlNode node in nodes) {
-                int itemId = int.Parse(node.Attributes!["id"]!.Value);
-                int rarity = int.Parse(node.Attributes["grade"]!.Value);
-                rarities[itemId] = rarity;
-            }
+        XmlDocument? innerDocument = Paths.XmlReader.GetXmlDocument(file);
+        if (innerDocument is null) {
+            throw new("Failed to load itemwebfinder.xml");
         }
+        XmlNodeList? nodes = innerDocument.SelectNodes("/ms2/key");
+        if (nodes is null) {
+            throw new("Failed to load itemwebfinder.xml");
+        }
+
+        foreach (XmlNode node in nodes) {
+            int itemId = int.Parse(node.Attributes?["id"]?.Value ?? "0");
+            int rarity = int.Parse(node.Attributes?["grade"]?.Value ?? "0");
+            rarities[itemId] = rarity;
+        }
+
+        // read KR ItemWebFinder.xml doc
+        innerDocument = new();
+        innerDocument.Load(Paths.ItemWebFinderXml);
+        nodes = innerDocument.SelectNodes("/ms2/key");
+        if (nodes is null) {
+            throw new("Failed to load itemwebfinder.xml");
+        }
+        foreach (XmlNode node in nodes) {
+            int itemId = int.Parse(node.Attributes!["id"]!.Value);
+            int rarity = int.Parse(node.Attributes["grade"]!.Value);
+            rarities[itemId] = rarity;
+        }
+
 
         return rarities;
     }
