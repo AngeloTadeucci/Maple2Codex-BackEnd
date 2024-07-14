@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS maple2_codex;
+DROP DATABASE IF EXISTS {databaseName};
 
-CREATE DATABASE maple2_codex;
+CREATE DATABASE {databaseName};

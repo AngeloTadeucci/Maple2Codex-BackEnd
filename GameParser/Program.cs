@@ -48,7 +48,8 @@ Console.WriteLine("Finished!");
 
 static void CreateDatabase() {
     string databaseSql = File.ReadAllText(Path.Combine(Paths.SolutionDir, "GameParser", "SQL", "Database.sql"));
-    MySqlScript script = new(QueryManager.ConnectionNoDb(), databaseSql);
+    string databaseName = Environment.GetEnvironmentVariable("DB_NAME")!;
+    MySqlScript script = new(QueryManager.ConnectionNoDb(), databaseSql.Replace("{databaseName}", databaseName));
     script.Execute();
 }
 
@@ -56,8 +57,7 @@ static bool DatabaseExists() {
     // Obtain the connection object
     var connection = QueryManager.ConnectionNoDb();
 
-    // Get the database name from the connection
-    string databaseName = "maple2_codex";
+    string? databaseName = Environment.GetEnvironmentVariable("DB_NAME");
 
     // Check if the database name is not null or empty
     if (string.IsNullOrEmpty(databaseName)) {
@@ -81,14 +81,18 @@ static bool DatabaseExists() {
 
 static void DropAndCreateTable(string tableName) {
     string databaseSql = File.ReadAllText(Path.Combine(Paths.SolutionDir, "GameParser", "SQL", $"{tableName}.sql"));
-    MySqlScript script = new(QueryManager.Connection(), databaseSql);
+    string databaseName = Environment.GetEnvironmentVariable("DB_NAME")!;
+
+    MySqlScript script = new(QueryManager.Connection(), databaseSql.Replace("{databaseName}", databaseName));
     script.Execute();
 }
 
 static bool TableExists(string tableName) {
     var connection = QueryManager.ConnectionNoDb();
 
-    string query = $"SELECT table_name FROM information_schema.tables WHERE table_schema = 'maple2_codex' AND table_name = '{tableName}'";
+    string? databaseName = Environment.GetEnvironmentVariable("DB_NAME");
+
+    string query = $"SELECT table_name FROM information_schema.tables WHERE table_schema = '{databaseName}' AND table_name = '{tableName}'";
     // Create the MySqlCommand object
     using (MySqlCommand command = new(query, connection)) {
         // Ensure the connection is open

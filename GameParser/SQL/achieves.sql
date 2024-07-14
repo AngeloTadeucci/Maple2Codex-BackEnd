@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS maple2_codex.achieves;
+DROP TABLE IF EXISTS {databaseName}.achieves;
 
-create table maple2_codex.achieves
+create table {databaseName}.achieves
 (
     id             int          not null,
     name           varchar(100) not null,

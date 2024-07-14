@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS maple2_codex.maps;
+DROP TABLE IF EXISTS {databaseName}.maps;
 
-create table maple2_codex.maps (
+create table {databaseName}.maps (
   id int not null,
   name varchar(100) not null,
   visit_count int not null default 0,

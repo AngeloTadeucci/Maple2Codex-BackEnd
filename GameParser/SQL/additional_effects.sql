@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS maple2_codex.additional_effects;
+DROP TABLE IF EXISTS {databaseName}.additional_effects;
 
-create table maple2_codex.additional_effects (
+create table {databaseName}.additional_effects (
     id int not null,
     icon_path varchar(100) not null,
     name varchar(400) not null,

@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS maple2_codex.item_boxes;
+DROP TABLE IF EXISTS {databaseName}.item_boxes;
 
-create table maple2_codex.item_boxes
+create table {databaseName}.item_boxes
 (
     uid             int auto_increment,
     box_id          int     not null,

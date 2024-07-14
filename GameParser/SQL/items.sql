@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS maple2_codex.items;
+DROP TABLE IF EXISTS {databaseName}.items;
 
-CREATE TABLE maple2_codex.items
+CREATE TABLE {databaseName}.items
 (
     id                  INT              NOT NULL,
     name                varchar(100)     not NULL,
