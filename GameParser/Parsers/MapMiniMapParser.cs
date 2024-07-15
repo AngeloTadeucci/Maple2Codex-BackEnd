@@ -1,4 +1,4 @@
-using System.Xml;
+﻿using System.Xml;
 using Maple2.File.IO.Crypto.Common;
 using Maple2.File.Parser.Tools;
 using Maple2Storage.Types;

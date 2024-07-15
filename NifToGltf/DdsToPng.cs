@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using MaplePacketLib2.Tools;
 public class DdsToPng {
 

@@ -25,7 +25,8 @@ if (!DatabaseExists()) {
     ("npcs", NpcParser.Parse),
     ("maps", MapNameParser.Parse),
     ("achieves", AchieveParser.Parse),
-    ("additional_effects", AdditionalEffectParser.Parse)
+    ("additional_effects", AdditionalEffectParser.Parse),
+    ("quests", QuestParser.Parse)
 ];
 
 foreach ((string, Action) table in tables) {
