@@ -8,10 +8,7 @@ using SqlKata.Execution;
 namespace GameParser.Parsers;
 
 public static class NpcParser {
-    private static readonly string[] ClassName =
-    {
-        "Common", "Leader", "Elite", "Boss", "World Boss", "Dungeon Boss", "Friendly"
-    };
+    private static readonly string[] ClassName = ["Friendly", "Common", "Leader", "Elite", "Boss", "World Boss", "Dungeon Boss"];
 
     private static readonly Dictionary<string, string> RaceName = new()
     {
@@ -30,8 +27,6 @@ public static class NpcParser {
     };
 
     public static void Parse() {
-
-
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.NpcParser parser = new(Paths.XmlReader);
         foreach ((int id, string? name, NpcData? data, List<EffectDummy> dummy) in parser.Parse()) {
