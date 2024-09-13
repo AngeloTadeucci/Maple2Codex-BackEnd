@@ -86,6 +86,7 @@ public static class ItemParser {
             string preset = data.tool.itemPresetPath.Contains('/') ? data.tool.itemPresetPath.Split('/')[1] : "";
 
             int boxId = 0;
+            int storyBookId = 0;
             switch (function.name) {
                 // selection boxes are SelectItemBox and 1,boxid
                 // normal boxes are OpenItemBox and 0,1,0,boxid
@@ -102,6 +103,10 @@ public static class ItemParser {
                         List<string> parameters = new(function.parameter.Split(','));
                         parameters.RemoveAll(param => param.Length == 0);
                         boxId = int.Parse(parameters[1]);
+                        break;
+                    }
+                case "StoryBook": {
+                        storyBookId = int.Parse(function.parameter);
                         break;
                     }
             }
@@ -159,6 +164,7 @@ public static class ItemParser {
                 item_type = property.type,
                 represent_option = property.representOption,
                 additional_effects = JsonSerializer.Serialize(additionalEffects, SerializeOptions.Options),
+                story_book_id = storyBookId,
             });
         }
     }
