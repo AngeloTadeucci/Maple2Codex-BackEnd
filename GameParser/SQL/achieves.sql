@@ -9,6 +9,7 @@ create table {databaseName}.achieves
     description             text         not NULL,
     complete_description    text         not NULL,
     icon           varchar(100) not null,
+    grades         text         not null,
     constraint trophies_pk primary key (id)
 ) engine = InnoDB
   default charset = utf8mb4
